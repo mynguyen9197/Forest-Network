@@ -1,0 +1,39 @@
+.logo{
+	height: 2em;
+	width: 2em;
+	border-radius: 1em;
+}
+.header{
+	position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+	height: 3em;
+	background-color: white;
+	padding: 0 7em 0 7em;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	font-weight: bold;
+}
+.search{
+	height: 1em;
+	border-radius: 1em;
+	border: 1px solid #E6ECF0;
+	padding: 0.5em;
+	flex-grow: 2;
+	margin: 0 13em 0 17em;
+}
+.link{
+	color: #66757f;
+	cursor: pointer;
+	border-bottom: 2px solid white;
+	height: calc(3em - 2px);
+	line-height: calc(3em - 2px);
+	padding: 0 1em 0 1em; 
+}
+.link:hover{
+	color: #76A9EA;
+	border-bottom: 2px solid #76A9EA;
+}
