@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PersonList from '../../components/follow/combine'
-import Header from '../../components/header/header'
-import HeaderWall from '../../components/home/headerWall'
-import { loadFollowing } from './action'
+
+import PersonList from '../components/follow/combine'
+import Header from '../components/header/header'
+import HeaderWall from '../components/profile/headerWall'
+import { loadFollowing } from '../actions/actionFollow'
+import { loadOwner } from '../actions/actionHome'
 
 
 class FollowingList extends Component {
 	componentDidMount(){
 	    this.props.dispatch(loadFollowing())
+	    this.props.dispatch(loadOwner())
 	}
 
 	render(){
 		let follows = this.props.following.slice()
 		return (
-			<div>
+			<React.Fragment>
 				<Header />
-				<HeaderWall />
+				<HeaderWall owner={this.props.owner}/>
 				<br /> <br />
 				<PersonList follows = { follows } isFollowing = { true } />
-			</div>
-			
+			</React.Fragment>	
 		);
 	}
 }
@@ -28,6 +30,7 @@ class FollowingList extends Component {
 const mapStateToProps = (state) => {
   return {
     following: state.following.following,
+    owner: state.owner.owner,
   }
 }
 

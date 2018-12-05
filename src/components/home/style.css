@@ -1,47 +1,4 @@
-.cover-img{
-	width: 100%;
-	height: 20em;
-}
-.avatar{
-	height: 14em;
-	width: 14em;
-	border: solid 0.5em white;
-	border-radius: 7.25em;
-	bottom: -3em;
-    position: absolute;
-    transition: bottom .3s;
-    z-index: 1;
-    flex-grow: 1;
-}
-.info{
-	padding: 0 10em 0 10em;
-	margin: -0.4em;
-	height: 4em;
-	background-color: white;
-	position: relative;	
-}
-.profile-items{
-	height: 4em;
-	margin-left: 14em;
-	display: flex;
-	align-items: center;
-}
-.header-wall{
-	margin-top: 3em;
-	margin-bottom: 1em;
-}
-.profile-item{
-	
-	text-align: center;
-	flex-grow: 3;
-}
-.item{
-	font-weight: bold;
-	color: #66757f;	
-}
-.value{
-	font-weight: bold;
-}
+
 .post{
 	width: 32em;
 	background-color: white;

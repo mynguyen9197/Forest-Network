@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Profile from '../../components/profile/profile'
-import { loadProfile, updateProfile } from './action'
-import '../../App.css'
+import Profile from '../components/profile/profile'
+import { loadProfile, updateProfile } from '../actions/actionProfile.js'
+import '../App.css'
 
 const mapStateToProps = (state) => {
   return {

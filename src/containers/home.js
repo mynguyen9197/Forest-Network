@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Header from '../../components/header/header'
-import HeaderWall from '../../components/home/headerWall'
-import Post from '../../components/home/post'
-import InfoOwner from '../../components/profile/infoOwner'
-import Recommand from '../../components/home/recommand'
-import avt from './../../img/images.jpg'
-import { loadPost, loadRecommand, loadOwner } from './action'
+import Header from '../components/header/header'
+import HeaderWall from '../components/profile/headerWall.js'
+import Post from '../components/home/post'
+import InfoOwner from '../components/profile/infoOwner'
+import Recommand from '../components/home/recommand'
+import avt from '../img/images.jpg'
+import { loadPost, loadRecommand, loadOwner } from '../actions/actionHome.js'
 
 class Home extends Component {
 	componentDidMount(){
@@ -19,7 +19,7 @@ class Home extends Component {
 		let posts = this.props.posts
 		console.log(this.props.owner)
 		return (
-			<div>
+			<React.Fragment>
 				<Header/>
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
@@ -29,7 +29,7 @@ class Home extends Component {
 					</div>
 					<Recommand recommands={this.props.recommands}/>
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 }

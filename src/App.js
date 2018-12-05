@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
-import './App.css'
-import Followers from './containers/FollowContainer/followers'
-import Following from './containers/FollowContainer/following'
-import Home from './containers/HomeContainer/home'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import Detail from './containers/DetailContainer/detail'
 
+import './App.css'
+import Followers from './containers/followers'
+import Following from './containers/following'
+import Home from './containers/home'
+import Detail from './containers/detail'
 
 
 const App = () => (
   <Router>
       <Router>
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path="/followers" component={Followers} />
           <Route exact path="/following" component={Following} />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/detail" component={Detail} />
         </Switch>
       </Router>
   </Router>

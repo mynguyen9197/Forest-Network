@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import logo from './../../img/twitter.png'
 import avt from './../../img/images.jpg'
@@ -7,12 +8,12 @@ import './style.css';
 function Header(props) {
   return (
     <div className="header">
-      <a href="/ád"><img className="logo" src={logo} alt="" /></a> 
-      <a href="/ád" className="link"> Notifications </a>
-      <a href="/ád" className="link"> Messages </a>
+      <Link to="/"><img className="logoApp" src={logo} alt="" /></Link> 
+      <Link to="/" className="link"> Notifications </Link>
+      <Link to="/" className="link"> Messages </Link>
       <input className="search" placeholder="Search"/>
       <img className="logo" src={avt} alt="" />
-      <a href="/ád" className="link"> Sign out </a>
+      <Link to="/" className="link"> Sign out </Link>
     </div>
   );
 }

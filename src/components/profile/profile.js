@@ -4,7 +4,7 @@ import '../../App.css'
 import cover from './../../img/cover.jpg'
 import avt from './../../img/images.jpg'
 import InfoOwner from './infoOwner'
-import { updateProfile } from '../../containers/ProfileContainer/action'
+import { updateProfile } from '../../actions/actionProfile.js'
 
 import DatePicker from "react-datepicker";
  
