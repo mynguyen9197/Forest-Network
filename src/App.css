@@ -1,32 +1,62 @@
-.App {
-  text-align: center;
+.AppContent {
+    padding: 46px 0 0;
+    margin: 0 auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.leftside {
+    width: 30%!important;
+    float: left;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.rightside {
+    width: 70%!important;
+    float: right;
 }
 
-.App-link {
-  color: #61dafb;
+.AppContainer {
+    max-width: 1190px;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+div {
+    display: block;
+}
+
+.three-col .AppContent-main.content-main {
+  float: none;
+  margin: 0;
+}
+
+.content-main {
+    border-radius: 0;
+    position: relative;
+    width: auto;
+}
+
+body {
+    background: #e6ecf0;
+    color: #14171a;
+    font-size: 14px;
+    line-height: 20px;
+    overflow-y: scroll;
+}
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    position: relative;
+}
+
+.Grid--withGutter .Grid-cell {
+    padding: 0 5px;
+}
+
+.Grid-cell {
+    box-sizing: border-box;
+    font-size: 14px;
+    margin: 0 auto;
+    text-align: left;
+    vertical-align: top;
+    display: flex;
+    flex-wrap: wrap;
 }

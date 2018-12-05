@@ -3,7 +3,7 @@ export const loadFollowers = () => {
 		type: 'LOAD_FOLLOWERS',
 		followers: [
 			{ 
-				profileBio: "điên bẩm sinh!",
+				profileBio: "16/01/1997!",
 				username: "ThuHngNguyn13",
 				displayName: "Thu Hương Nguyễn",
 				profilePhoto: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"
@@ -15,7 +15,7 @@ export const loadFollowers = () => {
 				profilePhoto: "https://pbs.twimg.com/profile_images/973388045717155840/tk88NJtI_bigger.jpg"
 			},
 			{ 
-				profileBio: "điên bẩm sinh!",
+				profileBio: "Nguyễn Thị Bo!",
 				username: "ThuHngNguyn13",
 				displayName: "Thu Hương Nguyễn",
 				profilePhoto: "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"

@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import Followers from './containers/FollowContainer/followers'
 import Following from './containers/FollowContainer/following'
 import Home from './containers/HomeContainer/home'
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import Detail from './containers/DetailContainer/detail'
 
-class App extends Component {
-  render() {
-    return (
+
+
+const App = () => (
+  <Router>
       <Router>
         <Switch>
           <Route exact path="/followers" component={Followers} />
@@ -15,8 +17,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
         </Switch>
       </Router>
-    );
-  }
-}
+  </Router>
+)
 
 export default App;

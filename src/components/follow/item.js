@@ -4,9 +4,8 @@ import './style.css';
 class Person extends Component {
 	render(){
 		return (
-	       	<div className="Grid-cell u-size1of2 u-lg-size1of3 u-mb10">
 	       		<div className="ProfileCard">
-		  			<a className="ProfileCard-bg" href="/ThuHngNguyn13" tabindex="-1" aria-hidden="true" style={{backgroundColor: '#1DA1F2'}}>
+		  			<a className="ProfileCard-bg" href={this.props.follow.username} style={{backgroundColor: '#1DA1F2'}}>
 		  			</a>
 
 		  			<div className="ProfileCard-content">
@@ -96,7 +95,6 @@ class Person extends Component {
 					    </div>
 					</div>
 				</div>
-			</div>
 		)
 	}
 }
