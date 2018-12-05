@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import DetailCom from '../components/detail/detail'
 import Header from '../components/header/header'
 import HeaderWall from '../components/profile/headerWall'
+import InfoOwner from '../components/profile/infoOwner'
 import { loadOwner } from '../actions/actionHome'
-import { loadFollowers } from '../actions/actionFollow.js'
+import { loadFollowers } from '../actions/actionFollow'
 
 
 class Detail extends Component {
@@ -17,7 +18,10 @@ class Detail extends Component {
 			<React.Fragment>
 				<Header />
 				<HeaderWall owner={this.props.owner}/>
-				<DetailCom/>
+				<div className="content">
+					<InfoOwner owner={this.props.owner}/>
+					<DetailCom/>
+				</div>
 			</React.Fragment>
 		);
 	}

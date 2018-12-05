@@ -15,7 +15,7 @@ function Post(props) {
       </div>
       <div className="content-post" cols="50">{props.infoPost.content}</div>
       <img className="img-post" src={props.infoPost.urlPhoto} alt="" />
-      <div className="time-post">
+      <div className="attention">
         <div className="react"><i className="far fa-heart fa-heart-check" aria-hidden="true"></i> {props.infoPost.react}</div>
         <div className="cmt"><span>{props.infoPost.comment}</span> Comments</div>
         <div><span>{props.infoPost.share}</span> Shares</div>

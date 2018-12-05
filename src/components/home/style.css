@@ -1,5 +1,5 @@
 .post{
-	width: 32em;
+	width: 35em;
 	background-color: white;
 	padding: 0.5em 0.5em 0.5em 0.5em;
 	margin: 0.5em 0.5em 0.5em 0.5em;
@@ -27,10 +27,13 @@
 .info-post{
 	margin-left: 0.5em;
 }
-.time-post{
+.time-post, .attention{
 	font-size: 0.9em;
 	color: #9B9C9E;
 	display: flex;
+}
+.attention{
+	margin: 0.5em 0 0.5em 0;
 }
 .react{
 	flex-grow:1;
@@ -52,6 +55,7 @@
 	justify-content: space-between;
 	border-top: solid 1px #E9EBEE;
 	border-bottom: solid 1px #E9EBEE;
+	padding: 0.25em 0 0.25em 0;
 }
 .inte-post:hover{
 	background-color: #f6f6f7;
@@ -93,7 +97,7 @@ textarea{
 	line-height: 1em;
 	padding: 6px 18px 6px 18px;
 	cursor: pointer;
-	height: 3em;
+	height: 2.75em;
 	border-radius: 1.5em;
 	border: solid 1px #0093C5; 
 }
