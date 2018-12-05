@@ -28,7 +28,8 @@ function HeaderWall(props) {
                         <Link to="/" className="profile-item">
                             <div className="item"> Likes </div>
                             <div className="value"> {props.owner.like} </div>
-                        </Link> 
+                        </Link>
+                        <button className="bt-follow">Edit profile</button>
                     </div>
                 </div>
             </div>

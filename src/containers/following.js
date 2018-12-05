@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import PersonList from '../components/follow/combine'
 import Header from '../components/header/header'
 import HeaderWall from '../components/profile/headerWall'
+import InfoOwner from '../components/profile/infoOwner'
 import { loadFollowing } from '../actions/actionFollow'
 import { loadOwner } from '../actions/actionHome'
 
@@ -20,8 +21,10 @@ class FollowingList extends Component {
 			<React.Fragment>
 				<Header />
 				<HeaderWall owner={this.props.owner}/>
-				<br /> <br />
-				<PersonList follows = { follows } isFollowing = { true } />
+				<div className="content">
+					<InfoOwner owner={this.props.owner}/>
+					<PersonList follows = { follows } isFollowing = { true } />
+				</div>
 			</React.Fragment>	
 		);
 	}

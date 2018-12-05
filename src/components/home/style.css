@@ -1,4 +1,3 @@
-
 .post{
 	width: 32em;
 	background-color: white;
@@ -94,8 +93,8 @@ textarea{
 	line-height: 1em;
 	padding: 6px 18px 6px 18px;
 	cursor: pointer;
-	height: 2em;
-	border-radius: 1em;
+	height: 3em;
+	border-radius: 1.5em;
 	border: solid 1px #0093C5; 
 }
 .bt-follow:hover{

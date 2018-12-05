@@ -1,9 +1,14 @@
+.follow-cell{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50em;
+}
 .ProfileCard {
     background-color: #fff;
     border: 1px solid #e6ecf0;
     box-sizing: border-box;
     text-align: left;
-    width: 32%;
+    width: 24em;
     margin-bottom: 10px;
     margin: 5px;
 }
@@ -28,7 +33,6 @@ a {
     margin: 13px 15px;
     position: relative;
 }
-
 
 
 .ProfileCard a, .ProfileCard a:hover, .ProfileCard a:focus, .ProfileCard a:active, .ProfileCard .pretty-link, .ProfileCard .pretty-link:hover, .ProfileCard .pretty-link:focus, .ProfileCard .pretty-link:active {
@@ -243,6 +247,9 @@ a {
     position: relative;
     text-align: center;
     white-space: nowrap;
+}
+.EdgeButton:hover{
+    background-color: #E5F2F7;
 }
 
 button {

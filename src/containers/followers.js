@@ -5,6 +5,7 @@ import PersonList from '../components/follow/combine'
 import Header from '../components/header/header'
 import HeaderWall from '../components/profile/headerWall'
 import Profile from './profile'
+import InfoOwner from '../components/profile/infoOwner.js'
 import { loadFollowers } from '../actions/actionFollow'
 import { loadOwner } from '../actions/actionHome'
 import '../App.css'
@@ -22,18 +23,9 @@ class FollowersList extends Component {
 			<React.Fragment>
 				<Header />
 				<HeaderWall owner={this.props.owner}/>
-				<div className="AppContent">
-				    <div className="AppContainer">
-				        <div className="AppContent-main content-main u-cf" role="main" aria-labelledby="content-main-heading">
-				         	<div className="leftside">
-				         		<Profile /> {/*left component*/}
-				         	</div>
-			      			{/*right component*/}
-			      			<div className="rightside">
-			      				<PersonList isFollower = { true } follows = { follows } />
-			      			</div>
-					    </div>
-				    </div>
+				<div className="content">
+					<InfoOwner owner={this.props.owner}/>
+					<PersonList follows = { follows } isFollower = { true } />
 				</div>
 			</React.Fragment>
 		);

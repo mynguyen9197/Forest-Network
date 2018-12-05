@@ -5,13 +5,11 @@ import './style.css'
 
 function PersonList(props) {
 
-  return (
-	  <div className="Grid Grid--withGutter">
-	    <div className="Grid-cell">
+ 	return (
+	    <div className="follow-cell">
 	      { props.follows.map((follow, i) => <Person key={i} follow = {follow} isFollower = {props.isFollower} isFollowing = {props.isFollowing}/> )}
 	    </div>
-	  </div>
-  );
+  	);
 }
 
 
