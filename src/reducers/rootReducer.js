@@ -9,7 +9,6 @@ const reducer = combineReducers({
 	following: follow.loadFollowing,
 	posts: home.loadPost,
 	recommands: home.loadRecommand,
-	owner: home.loadOwner,
 	profile: profileReducer,
 })
 

@@ -319,3 +319,7 @@ ul {
     height: 24px;
 }
 
+.fa {
+    border-color: black;
+    color: transparent;
+}

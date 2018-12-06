@@ -20,11 +20,6 @@ function Post(props) {
         <div className="cmt"><span>{props.infoPost.comment}</span> Comments</div>
         <div><span>{props.infoPost.share}</span> Shares</div>
       </div>
-      <div className="bt-inte">
-        <button className="inte-post">Like</button>
-        <button className="inte-post">Comment</button>
-        <button className="inte-post">Share</button>
-      </div>
     </div>
   );
 }

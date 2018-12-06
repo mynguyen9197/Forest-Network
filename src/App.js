@@ -15,7 +15,7 @@ const App = () => (
           <Route exact path="/" component={Home} />
           <Route exact path="/followers" component={Followers} />
           <Route exact path="/following" component={Following} />
-          <Route exact path="/detail" component={Detail} />
+          <Route exact path="/:account/status/:id" component={Detail} />
         </Switch>
       </Router>
   </Router>

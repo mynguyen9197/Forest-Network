@@ -8,16 +8,16 @@ function InfoOwner(props) {
     if (props.owner && props.owner.photo)
         return (
             <div className="info-owner">
-                <div className="name-owner">{props.owner.name}</div>
-                <div className="email-owner">{props.owner.email}</div>
-                <div className="decrip-owner">{props.owner.description}</div>
+                <div className="name-owner">{props.owner.displayName}</div>
+                <div className="email-owner">@ {props.owner.username}</div>
+                <div className="decrip-owner">{props.owner.bio}</div>
                 <div className="div-owner"> 
                     <i className="far fa-calendar-alt"></i>
-                    <span> Joined December 2015 </span>
+                    <span> {props.owner.dateJoin} </span>
                 </div>
                 <div className="div-owner">
                     <i className="fas fa-birthday-cake"></i>
-                    <span> Born November 1997 </span>
+                    <span> {props.owner.dob} </span>
                 </div>
                 <div className="img">
                     <i className="fas fa-camera-retro"></i>
