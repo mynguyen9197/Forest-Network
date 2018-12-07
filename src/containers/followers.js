@@ -24,7 +24,7 @@ class FollowersList extends Component {
 				<Header />
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
-					<InfoOwner owner={this.props.owner}/>
+					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit}/>
 					<PersonList follows = { follows } isFollower = { true } />
 				</div>
 			</React.Fragment>
@@ -36,6 +36,7 @@ const mapStateToProps = (state) => {
   return {
     followers: state.followers.followers,
     owner: state.owner.owner,
+    flatEdit: state.flatEdit.isEdit,
   }
 }
 
