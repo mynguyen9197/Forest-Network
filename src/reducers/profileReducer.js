@@ -1,10 +1,9 @@
-export const profileReducer = (state = {profile: {}}, action) => {
-	
+export const profileReducer = (state = { owner:{} }, action) => {
 	switch(action.type){
-		case 'LOAD_PROFILE':
+		case 'LOAD_OWNER':
 			return {
 				...state,
-				profile: action.profile
+				owner: {...state.owner, ...action.owner}
 			}
 		case 'UPDATE_PROFILE':
 			return {
@@ -14,4 +13,4 @@ export const profileReducer = (state = {profile: {}}, action) => {
 		default:
 			return state
 	}
-} 
+}

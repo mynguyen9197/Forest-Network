@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import cover from './../../img/cover.jpg'
 import './style.css';
 
 function Post(props) {
@@ -19,11 +18,6 @@ function Post(props) {
         <div className="react"><i className="far fa-heart fa-heart-check" aria-hidden="true"></i> {props.infoPost.react}</div>
         <div className="cmt"><span>{props.infoPost.comment}</span> Comments</div>
         <div><span>{props.infoPost.share}</span> Shares</div>
-      </div>
-      <div className="bt-inte">
-        <button className="inte-post">Like</button>
-        <button className="inte-post">Comment</button>
-        <button className="inte-post">Share</button>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ export const loadPost = () => {
 		type: 'LOAD_POSTS',
 		posts: [
 			{ 
+				id: 1,
 				urlAvatar: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep-doc-dao-nhat-29.jpg",
 				name: "Tran Thanh Trung",
 				statusPost: "publicly",
@@ -14,6 +15,7 @@ export const loadPost = () => {
 				share: 10,
 			},
 			{
+				id: 2,
 				urlAvatar: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep-doc-dao-nhat-29.jpg",
 				name: "Cristinal Ronaldo",
 				statusPost: "privately",
@@ -25,11 +27,12 @@ export const loadPost = () => {
 				share: 10,
 			},
 			{ 
+				id: 3,
 				urlAvatar: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep-doc-dao-nhat-29.jpg",
 				name: "Chi Pu",
 				statusPost: "publicly",
 				timePost: 20,
-				content: "Anh xin lổi em đi",
+				content: "Anh xin lỗi em đi",
 				urlPhoto: "https://i.ytimg.com/vi/eXcWnvxK7Z8/hqdefault.jpg",
 				react: 100,
 				comment: 100,
@@ -71,7 +74,7 @@ export const loadOwner = () => {
 				urlAvatar: "https://tophinhanhdep.com/wp-content/uploads/2017/07/avatar-de-thuong-ve-tinh-yeu-kute-300x300.jpg",
 				urlCover: "http://www.likecovers.com/covers/original/don-t-count-the-days.jpg?i",
 				name: "Trần Thành Trung",
-				email: "@Luffy_123",
+				email: "Luffy_123",
 				description: "Death is like the wind, away by my side",
 				post: "1K",
 				following: "2M",

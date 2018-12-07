@@ -4,9 +4,6 @@ import "react-datepicker/dist/react-datepicker.css"
 import { flatEdit } from '../../actions/actionProfile'
 import { connect } from 'react-redux'
 
-
-import cover from './../../img/cover.jpg'
-import avt from './../../img/images.jpg'
 import './style.css';
 
 class EditProfile extends Component {

@@ -1,21 +1,12 @@
 import React, { Component } from 'react'
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
-import { flatEdit } from '../../actions/actionProfile'
-import { connect } from 'react-redux'
-
 
 import EditProfile from './editProfile'
-import cover from './../../img/cover.jpg'
-import avt from './../../img/images.jpg'
 import './style.css';
 
 class InfoOwner extends Component {
-    constructor(props){
-        super(props)
-    }
+  
     render(){
-        console.log(this.props.isEdit)
+        
         return (
             !this.props.isEdit && this.props.owner.photo?
                 <div className="info-owner">

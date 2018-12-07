@@ -2,18 +2,15 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import cover from './../../img/cover.jpg'
-import avt from './../../img/images.jpg'
 import { flatEdit } from '../../actions/actionProfile'
 import './style.css';
 
 class HeaderWall extends Component {
-    constructor(props){
-        super(props)
-    }
+
     editProfile = () => {
         this.props.flatEdit(true)
     }
+
     render() {
         return (
             <div className="header-wall">
@@ -53,4 +50,3 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(null, mapDispatchToProps)(HeaderWall);
-
