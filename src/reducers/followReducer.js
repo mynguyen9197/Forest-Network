@@ -1,5 +1,4 @@
 export const loadFollower = (state = { followers: [] }, action) => {
-	
 	switch(action.type){
 		case 'LOAD_FOLLOWERS':
 			return {

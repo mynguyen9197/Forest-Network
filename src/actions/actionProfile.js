@@ -21,3 +21,10 @@ export const updateProfile = (username, displayName, dob, location, website, bio
 		}
 	}
 }
+
+export const flatEdit = (bool) => {
+	return {
+		type: 'FLAT_EDIT',
+		isEdit: bool,
+	}
+}

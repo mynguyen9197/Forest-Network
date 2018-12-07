@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
+
 
 import Header from '../components/header/header'
 import HeaderWall from '../components/profile/headerWall.js'
@@ -9,6 +11,8 @@ import Recommand from '../components/home/recommand'
 import avt from '../img/images.jpg'
 import { loadPost, loadRecommand, loadOwner } from '../actions/actionHome.js'
 
+
+
 class Home extends Component {
 	componentDidMount(){
 	    this.props.dispatch(loadPost())
@@ -17,13 +21,12 @@ class Home extends Component {
 	}
 	render(){
 		let posts = this.props.posts
-		console.log(this.props.owner)
 		return (
 			<React.Fragment>
 				<Header/>
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
-					<InfoOwner owner={this.props.owner}/>
+					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit} />
 					<div>
 						{ this.props.posts.map((item, i) => <Post infoPost={item}/>)}
 					</div>
@@ -38,6 +41,7 @@ const mapStateToProps = (state) => {
     posts: state.posts.posts,
     recommands: state.recommands.recommands,
     owner: state.owner.owner,
+    flatEdit: state.flatEdit.isEdit,
   }
 }
 
