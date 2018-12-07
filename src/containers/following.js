@@ -9,10 +9,12 @@ import { loadFollowing } from '../actions/actionFollow'
 import { loadOwner } from '../actions/actionHome'
 
 
+
 class FollowingList extends Component {
 	componentDidMount(){
 	    this.props.dispatch(loadFollowing())
 	    this.props.dispatch(loadOwner())
+
 	}
 
 	render(){
@@ -22,7 +24,7 @@ class FollowingList extends Component {
 				<Header />
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
-					<InfoOwner owner={this.props.owner}/>
+					<InfoOwner owner={this.props.owner}  isEdit={this.props.flatEdit}/>
 					<PersonList follows = { follows } isFollowing = { true } />
 				</div>
 			</React.Fragment>	
@@ -34,6 +36,7 @@ const mapStateToProps = (state) => {
   return {
     following: state.following.following,
     owner: state.owner.owner,
+    flatEdit: state.flatEdit.isEdit,
   }
 }
 

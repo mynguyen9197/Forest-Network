@@ -74,7 +74,7 @@ export const loadOwner = () => {
 				urlAvatar: "https://tophinhanhdep.com/wp-content/uploads/2017/07/avatar-de-thuong-ve-tinh-yeu-kute-300x300.jpg",
 				urlCover: "http://www.likecovers.com/covers/original/don-t-count-the-days.jpg?i",
 				name: "Trần Thành Trung",
-				email: "@Luffy_123",
+				email: "Luffy_123",
 				description: "Death is like the wind, away by my side",
 				post: "1K",
 				following: "2M",

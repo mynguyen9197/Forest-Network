@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 
-import cover from './../../img/cover.jpg'
-import avt from './../../img/images.jpg'
 import './style.css';
+
 
 function Recommand(props) {
     return (

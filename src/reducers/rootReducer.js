@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
+
 import * as follow from './followReducer'
-import * as home from './homeReducer.js'
-import { profileReducer } from './profileReducer'
+import * as home from './homeReducer'
+import * as profile from './profileReducer'
+import * as edit from './editReducer'
 
 
 const reducer = combineReducers({
@@ -9,7 +11,9 @@ const reducer = combineReducers({
 	following: follow.loadFollowing,
 	posts: home.loadPost,
 	recommands: home.loadRecommand,
-	profile: profileReducer,
+	owner: home.loadOwner,
+	profile: profile.profileReducer,
+	flatEdit: edit.editReducer,
 })
 
 export default reducer

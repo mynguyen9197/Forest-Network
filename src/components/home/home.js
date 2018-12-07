@@ -27,12 +27,12 @@ class Home extends Component {
 		console.log(this.props.owner)
 		return (
 			<React.Fragment>
-				<Header ava={this.props.owner.urlAvatar}/>
-				<HeaderWall owner={this.props.owner} />
+				<Header/>
+				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
-					<InfoOwner owner={this.props.owner}/>
+					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit} />
 					<div>
-						{ this.props.posts.map((item, i) => <Link to={`/${this.props.owner.username}/status/${item.id}`} style={{ textDecoration: 'none', color:'black' }}><Post infoPost={item}/></Link>)}
+						{ this.props.posts.map((item, i) => <Link to={`/${this.props.owner.email}/status/${item.id}`} style={{ textDecoration: 'none', color:'black' }}><Post infoPost={item}/></Link>)}
 					</div>
 					<Recommand recommands={this.props.recommands}/>
 				</div>

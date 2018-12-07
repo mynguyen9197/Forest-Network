@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import { compose } from 'redux';
-import  Account from './account';
-import Status from'./status';
-import LikeComment from './likecmt';
-import './detail.css';
-import Modal from 'react-responsive-modal';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router'
+import  Account from './account'
+import Status from'./status'
+import LikeComment from './likecmt'
+import './detail.css'
+import Modal from 'react-responsive-modal'
 
 
 class Detail extends Component{

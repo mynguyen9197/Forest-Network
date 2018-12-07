@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 
-import cover from './../../img/cover.jpg'
 import './style.css';
 
 function Post(props) {
   return (
-    <div className="post">
+    <div className="post" id="opacity">
       <div className="owner">
         <img src={props.infoPost.urlAvatar} alt="" />
         <div className="info-post">

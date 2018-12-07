@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import { compose } from 'redux';
+import React, { Component } from 'react'
 import './detail.css';
 
 class Account extends Component{

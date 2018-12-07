@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import PersonList from '../components/follow/combine'
 import Header from '../components/header/header'
 import HeaderWall from '../components/profile/headerWall'
-import Profile from './profile'
 import InfoOwner from '../components/profile/infoOwner.js'
 import { loadFollowers } from '../actions/actionFollow'
 import { loadOwner } from '../actions/actionHome'
@@ -24,7 +23,7 @@ class FollowersList extends Component {
 				<Header />
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
-					<InfoOwner owner={this.props.owner}/>
+					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit}/>
 					<PersonList follows = { follows } isFollower = { true } />
 				</div>
 			</React.Fragment>
@@ -36,6 +35,7 @@ const mapStateToProps = (state) => {
   return {
     followers: state.followers.followers,
     owner: state.owner.owner,
+    flatEdit: state.flatEdit.isEdit,
   }
 }
 
