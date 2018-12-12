@@ -6,7 +6,8 @@ import Followers from './containers/followers'
 import Following from './containers/following'
 import Home from './containers/home'
 import Detail from './containers/detail'
-
+import Register from './components/register/index'
+import Login from './components/login'
 
 const App = () => (
   <Router>
@@ -16,6 +17,8 @@ const App = () => (
           <Route exact path="/followers" component={Followers} />
           <Route exact path="/following" component={Following} />
           <Route exact path="/:account/status/:id" component={Detail} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Router>
   </Router>
