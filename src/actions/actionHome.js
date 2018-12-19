@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const loadPost = () => {
 	return {
 		type: 'LOAD_POSTS',
@@ -67,28 +69,19 @@ export const loadRecommand = () => {
 }
 
 export const loadOwner = () => {
-	return {
-		type: 'LOAD_OWNER',
-		owner:
-			{
-				urlAvatar: "https://tophinhanhdep.com/wp-content/uploads/2017/07/avatar-de-thuong-ve-tinh-yeu-kute-300x300.jpg",
-				urlCover: "http://www.likecovers.com/covers/original/don-t-count-the-days.jpg?i",
-				name: "Trần Thành Trung",
-				email: "Luffy_123",
-				description: "Death is like the wind, away by my side",
-				post: "1K",
-				following: "2M",
-				followers: 2000,
-				like: 1000,
-				timeJoin: 12,
-				born: 12,
-				photo:
-				[
-					"https://pbs.twimg.com/profile_images/973388045717155840/tk88NJtI_bigger.jpg",
-					"https://pbs.twimg.com/profile_images/973388045717155840/tk88NJtI_bigger.jpg",
-					"https://pbs.twimg.com/profile_images/973388045717155840/tk88NJtI_bigger.jpg",
-					"https://pbs.twimg.com/profile_images/973388045717155840/tk88NJtI_bigger.jpg",
-				]
-			}
+	return dispatch => {
+		return fetch("/profile", {
+		  method: 'POST',
+		  body: JSON.stringify({publicKey: 'GCNLX2ZPPNRPX2IQSJSX73VGFN6O5ZQJ3CBFCA6Q6NTBKLKRA2ZKJHE7'}), // điền public key của mình vào đây
+		  headers:{
+		    'Content-Type': 'application/json'
+		  }
+		}).then(response => {
+			response.json()
+			.then(result => {
+				console.log(result[0])
+				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
+			})
+		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
 	}	
 }

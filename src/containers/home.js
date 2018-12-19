@@ -8,8 +8,8 @@ import Home from '../components/home/home'
 const mapDispatchToProps = (dispatch) => {
 	return{
 		loadPosts: () => dispatch(loadPost()),
-	    loadRecommand: () => dispatch(loadRecommand()),
-	    loadOwner: () => dispatch(loadOwner()),
+    loadRecommand: () => dispatch(loadRecommand()),
+    loadOwner: () => dispatch(loadOwner()),
 	}
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 import Header from '../header/header'
 import HeaderWall from '../profile/headerWall.js'
@@ -13,7 +14,8 @@ class Home extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			isEditing: false
+			isEditing: false,
+			response: ''
 		}
 	}
 
@@ -21,10 +23,20 @@ class Home extends Component {
 	    this.props.loadPosts()
 	    this.props.loadRecommand()
 	    this.props.loadOwner()
-	}
+	    // this.callApi()
+		   //    .then(res => this.setState({ response: res }))
+		   //    .catch(err => console.log(err));
+  	}
+
+   callApi = async () => {
+    const response = await fetch("/load")
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  }																	
 
 	render(){
-		console.log(this.props.owner)
+		console.log(this.state.response)
 		return (
 			<React.Fragment>
 				<Header/>
