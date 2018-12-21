@@ -39,7 +39,7 @@ class Home extends Component {
 		console.log(this.state.response)
 		return (
 			<React.Fragment>
-				<Header/>
+				<Header ava={avt}/>
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
 					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit} />

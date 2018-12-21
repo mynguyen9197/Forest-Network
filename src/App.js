@@ -8,6 +8,7 @@ import Home from './containers/home'
 import Detail from './containers/detail'
 import Register from './components/register/index'
 import Login from './components/login'
+import SignUp from './components/signup'
 
 const App = () => (
   <Router>
@@ -19,6 +20,7 @@ const App = () => (
           <Route exact path="/:account/status/:id" component={Detail} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp}/>
         </Switch>
       </Router>
   </Router>
