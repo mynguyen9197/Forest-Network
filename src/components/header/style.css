@@ -43,3 +43,85 @@
 	border-bottom: 2px solid #76A9EA;
 	text-decoration: none;
 }
+
+.wrap-content{
+	display: flex;
+	margin: 15px;
+}
+
+.tweet-box-avatar{
+	width: 30%;
+}
+
+.tweet-wrap {
+	margin-left: 15px;
+}
+
+.tweet-content{
+	border-radius: 5px;
+	border: 1px solid blue;
+}
+
+.image-selector > input {
+  display: none;
+}
+
+label > i {
+	margin-top: 10px;
+}
+
+.tool-bar{
+	display: flex;
+}
+
+.left{
+	float: left;
+	width: 50%;
+}
+
+.right{
+	float: right;
+	width: 50%;
+	text-align: right;
+}
+
+.right button{
+	float: right;
+	background-color: #1DA1F2;
+	color: white;
+	width: 100px;
+	height: 40px;
+	margin-left: 20px;
+}
+
+.right button:hover{
+	background-color: #4AB3F4;
+}
+
+.right button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+textarea{
+	resize: none;
+}
+
+.notify{
+	width: 600px;
+	height: 100px;
+	text-align: center;
+	color: #14171a;
+    font-size: 14px;
+}
+
+.modal{
+	border-radius: 6px;
+}
+
+select{
+	margin-top: 8px;
+	height: 30px;
+	border-radius: 3px;
+	width: 100px;
+}

@@ -1,3 +1,5 @@
+import { deriveKey } from '../utils'
+
 export const loadFollowers = () => {
 	return {
 		type: 'LOAD_FOLLOWERS',
@@ -71,3 +73,22 @@ export const loadFollowing = () => ({
 		}
 	]
 })
+
+// export const doFollow = (account) => ({
+// 	const { user, secret } = deriveKey()
+// 	return dispatch => {
+// 		return fetch("/transaction", {
+// 		  method: 'POST',
+// 		  body: JSON.stringify({publicKey: publicKey, account: account}),
+// 		  headers:{
+// 		    'Content-Type': 'application/json'
+// 		  }
+// 		}).then(response => {
+// 			response.json()
+// 			.then(result => {
+// 				console.log(result[0])
+// 				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
+// 			})
+// 		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
+// 	}
+// })

@@ -1,15 +1,16 @@
-import axios from 'axios'
-import CryptoJS from 'crypto-js'
-import { Keypair } from 'stellar-base'
+import { deriveKey, sequence, server } from '../utils'
+import { encode, decode, sign } from '../lib/tx'
 
-export const loadPost = (account) => {
+const { user, secret } = deriveKey()
+
+export const loadPost = () => {
 	// return dispatch => {
-	// 	return fetch(`/posts/getPost?account=${account}`)
+	// 	return fetch(`/posts/getPost?account=${user}`)
 	// 	.then(response => {
 	// 		response.json()
 	// 		.then(result => {
 	// 			console.log(result[0])
-	// 			dispatch({ type: 'LOAD_POSTS', posts:result[0].post })
+	// 			dispatch({ type: 'LOAD_POSTS', posts: []})
 	// 		})
 	// 	}).catch(err => dispatch({ type: 'LOAD_POSTS_ERROR', err }))
 	// }
@@ -81,16 +82,12 @@ export const loadRecommand = () => {
 }
 
 export const loadOwner = () => {
-	const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('secret'), "Secret Key")
-	const secret = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8))
-	const account = Keypair.fromSecret(secret).publicKey()
-	
+
 	return dispatch => {
-		return fetch(`/users/profile?account=${account}`)
+		return fetch(`/users/profile?account=${user}`)
 		.then(response => {
 			response.json()
 			.then(result => {
-				console.log(result[0])
 				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
 			})
 		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
@@ -112,3 +109,56 @@ export const loadOwner = () => {
 // 			})
 // 		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
 // 	}
+
+export const postStatus = (content, shareWith) => {
+	// return dispatch => {
+	// 	return fetch("/posts/post", {
+	// 	  method: 'POST',
+	// 	  body: JSON.stringify({publicKey: }), // điền public key của mình vào đây
+	// 	  headers:{
+	// 	    'Content-Type': 'application/json'
+	// 	  }
+	// 	}).then(response => {
+	// 		response.json()
+	// 		.then(result => {
+	// 			console.log(result[0])
+	// 			dispatch({ type: 'POST_STATUS', owner:[] })
+	// 		})
+	// 	}).catch(err => dispatch({ type: 'POST_ERROR', err }))
+	// }
+	console.log({content, shareWith})
+	return{
+		type: 'POST_STATUS',
+		result: {
+			content, shareWith
+		}
+	}
+}
+
+// const postContent = async (req) => {
+// 	const cur_sequence = await sequence(user) + 1
+
+// 	const tx = {
+// 		version: 1,
+// 	    account: user,
+// 	    sequence: cur_sequence,
+// 	    memo: Buffer.alloc(0),
+// 	    operation: "post",
+// 	    params:{
+// 	    	keys: shareWith,
+// 	     	content:{
+// 	     		type: 1,
+// 	     		text: content
+// 	     	}
+// 	    },
+// 	    signature: new Buffer(64),
+// 	}
+
+// 	sign(tx, secret)
+// 	var post = encode(tx).toString('hex')
+// 	post = '0x' + post
+
+// 	var url = server + `broadcast_tx_commit?tx=${post}`
+// 	return tx
+// 	//axios.get(url).then(res => console.log(res))
+// }
