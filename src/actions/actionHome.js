@@ -1,6 +1,18 @@
 import axios from 'axios'
+import CryptoJS from 'crypto-js'
+import { Keypair } from 'stellar-base'
 
-export const loadPost = () => {
+export const loadPost = (account) => {
+	// return dispatch => {
+	// 	return fetch(`/posts/getPost?account=${account}`)
+	// 	.then(response => {
+	// 		response.json()
+	// 		.then(result => {
+	// 			console.log(result[0])
+	// 			dispatch({ type: 'LOAD_POSTS', posts:result[0].post })
+	// 		})
+	// 	}).catch(err => dispatch({ type: 'LOAD_POSTS_ERROR', err }))
+	// }
 	return {
 		type: 'LOAD_POSTS',
 		posts: [
@@ -69,14 +81,13 @@ export const loadRecommand = () => {
 }
 
 export const loadOwner = () => {
+	const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('secret'), "Secret Key")
+	const secret = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8))
+	const account = Keypair.fromSecret(secret).publicKey()
+	
 	return dispatch => {
-		return fetch("/profile", {
-		  method: 'POST',
-		  body: JSON.stringify({publicKey: 'GCNLX2ZPPNRPX2IQSJSX73VGFN6O5ZQJ3CBFCA6Q6NTBKLKRA2ZKJHE7'}), // điền public key của mình vào đây
-		  headers:{
-		    'Content-Type': 'application/json'
-		  }
-		}).then(response => {
+		return fetch(`/users/profile?account=${account}`)
+		.then(response => {
 			response.json()
 			.then(result => {
 				console.log(result[0])
@@ -85,3 +96,19 @@ export const loadOwner = () => {
 		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
 	}	
 }
+
+// return dispatch => {
+// 		return fetch("/posts/getPost", {
+// 		  method: 'POST',
+// 		  body: JSON.stringify({publicKey: 'GCNLX2ZPPNRPX2IQSJSX73VGFN6O5ZQJ3CBFCA6Q6NTBKLKRA2ZKJHE7'}), // điền public key của mình vào đây
+// 		  headers:{
+// 		    'Content-Type': 'application/json'
+// 		  }
+// 		}).then(response => {
+// 			response.json()
+// 			.then(result => {
+// 				console.log(result[0])
+// 				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
+// 			})
+// 		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
+// 	}

@@ -22,18 +22,8 @@ class Home extends Component {
 	componentDidMount(){
 	    this.props.loadPosts()
 	    this.props.loadRecommand()
-	    this.props.loadOwner()
-	    // this.callApi()
-		   //    .then(res => this.setState({ response: res }))
-		   //    .catch(err => console.log(err));
-  	}
-
-   callApi = async () => {
-    const response = await fetch("/load")
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  }																	
+	    this.props.loadOwner(localStorage.getItem('secret'))
+  	}																
 
 	render(){
 		console.log(this.state.response)
