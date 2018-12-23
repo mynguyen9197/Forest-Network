@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import './style.css';
 
 class Person extends Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			isFollowing: this.props.isFollowing
+		}
+	}
+
+	handleClick(){
+		this.setState({
+			isFollowing: !this.state.isFollowing
+		})
+	}
+
 	render(){
 		return (
        		<div className="ProfileCard">
@@ -18,13 +31,13 @@ class Person extends Component {
 	          				<div className="UserActions   UserActions--small u-textLeft">
 	    						<div className="user-actions btn-group not-following not-muting can-dm " >
 	          						<span className="user-actions-follow-button js-follow-btn follow-button">
-	  									{ this.props.isFollowing? <button type="button" className="
+	  									{ this.state.isFollowing? <button type="button" className="
 										    EdgeButton
 										    EdgeButton--secondary
 										    EdgeButton--small 
 										    
 										    button-text
-										    follow-text">
+										    follow-text" onClick={this.handleClick.bind(this)}>
 										      <span class="u-hiddenVisually">Following </span>
 										</button>:<button type="button" className="
 										    EdgeButton
@@ -32,7 +45,7 @@ class Person extends Component {
 										    EdgeButton--small 
 										    
 										    button-text
-										    follow-text">
+										    follow-text"onClick={this.handleClick.bind(this)}>
 										      <span class="u-hiddenVisually">Follow </span>
 										</button>}
 									</span>

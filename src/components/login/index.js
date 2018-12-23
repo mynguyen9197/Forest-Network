@@ -1,51 +1,97 @@
 import React, { Component } from 'react'
+import { Keypair } from 'stellar-base'
+import { connect } from 'react-redux'
+import { axios } from 'axios'
+import CryptoJS from "crypto-js"
+import { withRouter, Redirect } from "react-router-dom"
+
+import './fonts/font-awesome-4.7.0/css/font-awesome.min.css'
+import './fonts/iconic/css/material-design-iconic-font.min.css'
 import './css/main.css'
 import './css/util.css'
 
+import { loadOwner } from '../../actions/actionHome'
+
 class Login extends Component{
+
+	constructor(props){
+		super(props)
+		this.state = {
+			secret: '',
+		}
+	}
+
+	handleChange(e){
+		this.setState({
+			secret: e.target.value
+		})
+	}
+
+	deriveKey(secret){
+		const key = Keypair.fromSecret(secret)
+		return key.publicKey()
+	}
+
+	handleClick(e){
+		e.preventDefault()
+		if(this.state.secret){
+			const publicKey = this.deriveKey(this.state.secret)
+			fetch(`https://komodo.forest.network/tx_search?query="account='${publicKey}'"`)
+			.then(res => {
+				res.json()
+				.then(result => {
+					if(result.result.total_count ==='0'){
+						alert('Tài khoản không tồn tại')
+					}else{
+						const encrypted = CryptoJS.AES.encrypt(JSON.stringify(this.state.secret), "Secret Key")
+						
+						localStorage.setItem('secret', encrypted)
+						let { from } = this.props.location.state || { from: { pathname: "/" } }
+						this.props.history.push(from)
+					}
+				})
+			})
+		}
+		else{
+			alert('Hãy nhập Secret Key')
+		}
+		
+	}
+
 	render(){
+		let { from } = this.props.location.state || { from: { pathname: "/" } }
+		if (localStorage.getItem('secret')) return <Redirect to={from} />
+
 		return(
-			<div className="limiter">
-				<div className="container-login100" >
-					<div className="wrap-login100 p-t-190 p-b-30">
-						<form className="login100-form validate-form">
-							<span className="login100-form-title p-t-20 p-b-45">
-								LOGIN
+			<div class="limiter">
+				<div class="container-login100">
+					<div class="wrap-login100">
+						<form class="login100-form validate-form">
+
+							<span class="login100-form-title p-b-34 p-t-27">
+								Log in
 							</span>
 
-							<div className="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
-								<input className="input100" type="text" name="username" placeholder="Username" />
-								<span className="focus-input100"></span>
-								<span className="symbol-input100">
-									<i className="fa fa-user"></i>
-								</span>
+							<div class="wrap-input100 validate-input">
+								<input class="input100" type="text" name="secretKey" placeholder="Secret Key" onChange={this.handleChange.bind(this)}/>
+								<span class="focus-input100" data-placeholder="&#xf191;"></span>
 							</div>
 
-							<div className="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
-								<input className="input100" type="password" name="pass" placeholder="Password" />
-								<span className="focus-input100"></span>
-								<span className="symbol-input100">
-									<i className="fa fa-lock"></i>
-								</span>
+							<div class="contact100-form-checkbox">
+								<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
+								<label class="label-checkbox100" for="ckb1">
+									Remember me
+								</label>
 							</div>
 
-							<div className="container-login100-form-btn p-t-10">
-								<button className="login100-form-btn">
+							<div class="container-login100-form-btn">
+								<button class="login100-form-btn" onClick={this.handleClick.bind(this)}>
 									Login
 								</button>
 							</div>
 
-							<div className="text-center w-full p-t-25 p-b-230">
-								<a href="#" className="txt1">
-									Forgot Username / Password?
-								</a>
-							</div>
-
-							<div className="text-center w-full">
-								<a className="txt1" href="/register">
-									Create new account
-									<i className="fa fa-long-arrow-right"></i>						
-								</a>
+							<div class="text-center p-t-90">
+								
 							</div>
 						</form>
 					</div>
@@ -55,4 +101,10 @@ class Login extends Component{
 	}
 }
 
-export default Login
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadOwner: (publicKey) => dispatch(loadOwner(publicKey))
+    }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(Login))
