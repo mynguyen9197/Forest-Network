@@ -9,7 +9,7 @@ import Detail from './containers/detail'
 import Register from './components/register/index'
 import Login from './components/login'
 import SignUp from './components/signup'
-
+import NewFeed from './containers/newfeed'
 const App = () => (
   <Router>
       <Router>
@@ -21,6 +21,7 @@ const App = () => (
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp}/>
+          <Route exact path="/newfeed" component={NewFeed}/>
         </Switch>
       </Router>
   </Router>

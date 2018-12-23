@@ -44,7 +44,7 @@ class Home extends Component {
 				<div className="content">
 					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit} />
 					<div>
-						{ this.props.posts.map((item, i) => <Link to={`/${this.props.owner.email}/status/${item.id}`} style={{ textDecoration: 'none', color:'black' }}><Post infoPost={item}/></Link>)}
+						{ this.props.posts.map((item, i) => <Post infoPost={item}/>)}
 					</div>
 					<Recommand recommands={this.props.recommands}/>
 				</div>
