@@ -21,7 +21,7 @@ class FollowingList extends Component {
 		let follows = this.props.following.slice()
 		return (
 			<React.Fragment>
-				<Header />
+				<Header owner={this.props.owner} />
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
 					<InfoOwner owner={this.props.owner}  isEdit={this.props.flatEdit}/>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Keypair } from 'stellar-base'
-import { connect } from 'react-redux'
 import { axios } from 'axios'
 import CryptoJS from "crypto-js"
 import { withRouter, Redirect } from "react-router-dom"
@@ -10,8 +9,6 @@ import './fonts/iconic/css/material-design-iconic-font.min.css'
 import './css/main.css'
 import './css/util.css'
 
-import { loadOwner } from '../../actions/actionHome'
-
 class Login extends Component{
 
 	constructor(props){
@@ -20,6 +17,11 @@ class Login extends Component{
 			secret: '',
 		}
 	}
+
+	// componentDidMount(){
+	// 	let { from } = this.props.location.state || { from: { pathname: "/" } }
+	// 	if (localStorage.getItem('secret')) return <Redirect to={from} />
+	// }
 
 	handleChange(e){
 		this.setState({
@@ -46,6 +48,7 @@ class Login extends Component{
 						const encrypted = CryptoJS.AES.encrypt(JSON.stringify(this.state.secret), "Secret Key")
 						
 						localStorage.setItem('secret', encrypted)
+						localStorage.setItem('public', publicKey)
 						let { from } = this.props.location.state || { from: { pathname: "/" } }
 						this.props.history.push(from)
 					}
@@ -59,6 +62,7 @@ class Login extends Component{
 	}
 
 	render(){
+
 		let { from } = this.props.location.state || { from: { pathname: "/" } }
 		if (localStorage.getItem('secret')) return <Redirect to={from} />
 
@@ -101,10 +105,4 @@ class Login extends Component{
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        loadOwner: (publicKey) => dispatch(loadOwner(publicKey))
-    }
-}
-
-export default withRouter(connect(null, mapDispatchToProps)(Login))
+export default withRouter(Login)

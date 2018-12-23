@@ -1,7 +1,8 @@
 import { deriveKey, sequence, server } from '../utils'
 import { encode, decode, sign } from '../lib/tx'
 
-const { user, secret } = deriveKey()
+const secret = localStorage.getItem('secret')
+const user = localStorage.getItem('public')
 
 export const loadPost = () => {
 	// return dispatch => {
@@ -82,16 +83,19 @@ export const loadRecommand = () => {
 }
 
 export const loadOwner = () => {
+	return {
+		type: 'LOAD_OWNER', owner:[]
+	}
 
-	return dispatch => {
-		return fetch(`/users/profile?account=${user}`)
-		.then(response => {
-			response.json()
-			.then(result => {
-				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
-			})
-		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
-	}	
+	// return dispatch => {
+	// 	return fetch(`/users/profile?account=${user}`)
+	// 	.then(response => {
+	// 		response.json()
+	// 		.then(result => {
+	// 			dispatch({ type: 'LOAD_OWNER', owner:result[0] })
+	// 		})
+	// 	}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
+	// }	
 }
 
 // return dispatch => {

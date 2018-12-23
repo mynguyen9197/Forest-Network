@@ -22,7 +22,7 @@ class Home extends Component {
 	componentDidMount(){
 	    this.props.loadPosts()
 	    this.props.loadRecommand()
-	    this.props.loadOwner(localStorage.getItem('secret'))
+	    this.props.loadOwner()
   	}																
 
 	render(){

@@ -11,16 +11,17 @@ import '../App.css'
 
 
 class FollowersList extends Component {
+
 	componentDidMount(){
-	    this.props.dispatch(loadFollowers())
-	    this.props.dispatch(loadOwner())
-	}
+	    this.props.loadFollowers()
+	    this.props.loadOwner()
+  	}
 
 	render(){
 		let follows = this.props.followers.slice()
 		return (
 			<React.Fragment>
-				<Header />
+				<Header owner={this.props.owner}/>
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
 					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit}/>
@@ -39,4 +40,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(FollowersList)
+const mapDispatchToProps = (dispatch) => {
+	return{
+		loadFollowers: () => dispatch(loadFollowers()),
+    	loadOwner: () => dispatch(loadOwner()),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FollowersList)

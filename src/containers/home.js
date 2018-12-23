@@ -9,7 +9,7 @@ const mapDispatchToProps = (dispatch) => {
 	return{
 		loadPosts: () => dispatch(loadPost()),
     loadRecommand: () => dispatch(loadRecommand()),
-    loadOwner: (key) => dispatch(loadOwner(key)),
+    loadOwner: () => dispatch(loadOwner()),
 	}
 }
 

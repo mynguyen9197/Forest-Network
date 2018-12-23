@@ -40,7 +40,6 @@ const App = () => (
       <Router>
         <Switch>
           <AuthRoute exact path="/" component={Home} />
-          <AuthRoute exact path="/:account" component={Home} />
           <AuthRoute exact path="/followers" component={Followers} />
           <AuthRoute exact path="/following" component={Following} />
           <AuthRoute exact path="/:account/status/:id" component={Detail} />
