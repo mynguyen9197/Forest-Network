@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import Modal from 'react-responsive-modal'
 import { connect } from 'react-redux'
 
-import { postStatus } from '../../actions/actionHome'
+//import { postStatus } from '../../actions/actionHome'
 
 import logo from './../../img/twitter.png'
 import './style.css';
@@ -62,7 +62,7 @@ class Header extends Component {
   handleSubmit(e){
     const { status, shared } = this.state
     e.preventDefault()
-    this.props.postStatus(status, shared)
+    //this.props.postStatus(status, shared)
     this.setState({
       open: false,
       open2: true,
@@ -91,8 +91,8 @@ class Header extends Component {
             <li><a className="link" onClick={this.handleClick.bind(this)}> Sign out </a></li>
           </ul>
         </div>&nbsp;&nbsp;&nbsp;&nbsp;
-        <button className="btn btn-info" style={{borderRadius: "25px"}} onClick={this.onOpenModal}> Đăng bài </button>
-        <Modal open={this.state.open} onClose={this.onCloseModal} center className="modal">
+        <button className="btn btn-info" style={{borderRadius: "25px"}} onClick={this.onOpenModal.bind(this)}> Đăng bài </button>
+        <Modal open={this.state.open} onClose={this.onCloseModal.bind(this)} center className="modal">
             <div className="modal-header">
               <h3 className="modal-title" id="Tweetstorm-dialog-header">Compose new Tweet</h3>
             </div>
@@ -138,7 +138,7 @@ class Header extends Component {
                 </div>
               </div>
         </Modal>
-        <Modal open={this.state.open2} onClose={this.onCloseModal2} top>
+        <Modal open={this.state.open2} onClose={this.onCloseModal2.bind(this)} top>
           <div className="notify">
             Bài viết đã được đăng!
           </div>
@@ -148,10 +148,11 @@ class Header extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        postStatus:(status, shared) => dispatch(postStatus(status, shared))
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         postStatus:(status, shared) => dispatch(postStatus(status, shared))
+//     }
+// }
 
-export default withRouter(connect(null, mapDispatchToProps)(Header))
+//export default withRouter(connect(null, mapDispatchToProps)(Header))
+export default withRouter (Header)
