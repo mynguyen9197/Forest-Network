@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import Profile from './profile.js';
 import Post from './post.js';
 import Recommand from './recommand.js'
+import axios from 'axios';
 
 
 class NewFeed extends Component{
@@ -21,6 +22,7 @@ class NewFeed extends Component{
 	componentDidMount(){
 	    this.props.loadPosts()
 	    this.props.loadRecommand()
+	    this.props.loadOwner()
   	}
 
 
@@ -28,7 +30,7 @@ class NewFeed extends Component{
 	render(){
 		return(
 			<>
-				<Header ava={avt}/>
+				<Header owner={this.props.owner}/>
 				<div className="bodynewfeed">
 					<Profile/>
 					<div className="content">

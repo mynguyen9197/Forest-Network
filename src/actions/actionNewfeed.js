@@ -52,6 +52,18 @@ export const loadPost = () => {
 				comment: 100,
 				share: 100,
 			},
+			{ 
+				id: 5,
+				urlAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpDPuGVRffI_epg_UeyVwlcXFPP-tHECEZbVvKXeEG4OAlmEmI",
+				name: "NaNa",
+				statusPost: "publicly",
+				timePost: 20,
+				content: "Cà rem thật tuyệt ^^ hí hí hí:))",
+				urlPhoto: "https://vmode.vn/uploads/2014/06/be-yeu.jpg",
+				react: 100,
+				comment: 100,
+				share: 100,
+			},
 		]
 	}
 }
@@ -77,5 +89,12 @@ export const loadRecommand = () => {
 				name: "Lão Hạc",
 			}
 		]
+	}
+}
+
+
+export const loadOwner = () => {
+	return {
+		type: 'LOAD_OWNER', owner:[]
 	}
 }
