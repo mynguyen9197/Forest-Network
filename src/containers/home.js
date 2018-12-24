@@ -7,9 +7,9 @@ import Home from '../components/home/home'
 
 const mapDispatchToProps = (dispatch) => {
 	return{
-		loadPosts: () => dispatch(loadPost()),
+		loadPosts: (user) => dispatch(loadPost(user)),
     loadRecommand: () => dispatch(loadRecommand()),
-    loadOwner: () => dispatch(loadOwner()),
+    loadOwner: (user) => dispatch(loadOwner(user)),
 	}
 }
 

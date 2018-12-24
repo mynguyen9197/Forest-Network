@@ -60,13 +60,13 @@ class Post extends Component{
         return (
         <div className="post" id="opacity">
             <div className="owner">
-                <img src={this.props.infoPost.urlAvatar} alt="" />
+                <img src={this.props.owner.urlAvatar} alt="" />
                 <div className="info-post">
-                    <div className="name"> {this.props.infoPost.name} </div>
+                    <div className="name"> {this.props.owner.name} </div>
                     <div className="time-post">Shared <span>&nbsp;{this.props.infoPost.statusPost}</span>&nbsp;-&nbsp;<span> about {this.props.infoPost.timePost} minutes ago </span> </div>
                 </div>
             </div>
-            <div className="content-post" cols="50">{this.props.infoPost.content}</div>
+            <div className="content-post" cols="50">{this.props.infoPost.text}</div>
             <img className="img-post" src={this.props.infoPost.urlPhoto} alt="" />
             <div className="attention">
                 {

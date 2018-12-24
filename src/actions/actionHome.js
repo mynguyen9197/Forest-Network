@@ -2,14 +2,15 @@ import { deriveKey, sequence, server } from '../utils'
 import { encode, decode, sign } from '../lib/tx'
 
 const secret = localStorage.getItem('secret')
-const user = localStorage.getItem('public')
+const pub = localStorage.getItem('public')
 //'GDAAVIRUC7PII4YR5SZQHKBCY3PZDNN6XAORXRIXGLPNGSW7ECSRO5OZ'
-export const loadPost = () => {
+export const loadPost = (user) => {
 	return dispatch => {
 		return fetch(`/getPost?account=${user}`)
 		.then(response => {
 			response.json()
 			.then(result => {
+				console.log(result.post)
 				dispatch({ type: 'LOAD_POSTS', posts: result.post})
 			})
 		}).catch(err => dispatch({ type: 'LOAD_POSTS_ERROR', err }))
@@ -40,7 +41,7 @@ export const loadRecommand = () => {
 	}
 }
 
-export const loadOwner = () => {
+export const loadOwner = (user) => {
 	// return dispatch => {
 	// 	return fetch(`/users/getInf?account=${user}`)
 	// 	.then(response => {
@@ -79,7 +80,7 @@ export const postStatus = (content, shareWith) => {
 	}
 
 const postContent = async (content, shareWith) => {
-
+	const user = pub
 	const cur_sequence = await sequence(user) + 1
 	const secretKey = deriveKey(secret)
 	const tx = {

@@ -15,18 +15,19 @@ class Home extends Component {
 		super(props)
 		this.state = {
 			isEditing: false,
-			response: ''
+			response: '',
+			user: localStorage.getItem('public')
 		}
 	}
 
 	componentDidMount(){
-	    this.props.loadPosts()
+	    this.props.loadPosts(this.state.user)
 	    this.props.loadRecommand()
-	    this.props.loadOwner()
+	    this.props.loadOwner(this.state.user)
   	}																
 
 	render(){
-
+console.log( this.props.posts)
 		return (
 			<React.Fragment>
 				<Header owner={this.props.owner} />

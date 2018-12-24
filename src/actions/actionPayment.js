@@ -10,13 +10,14 @@ export const loadPayment = () => {
 		.then(response => {
 			response.json()
 			.then(result => {
-				dispatch({ type: 'LOAD_PAYMENTS', posts: {pay, receive}})
+				dispatch({ type: 'LOAD_PAYMENTS', send: result.send, receive: result.receive})
 			})
 		}).catch(err => dispatch({ type: 'LOAD_PAYMENTS_ERROR', err }))
 	}
 }
 
 export const paymentAction = (money, mess, receiver) => {
+
 	return dispatch => doPayment(money, mess, receiver)
 	.then(response =>{
 		return fetch("/transaction", {
@@ -32,10 +33,12 @@ export const paymentAction = (money, mess, receiver) => {
 	}
 
 const doPayment = async (money, mess, receiver) => {
-	const message = mess===''?Buffer.alloc(0):Buffer.from(mess)
+	let message = Buffer.alloc(0)
 
-	// if(req.body.message != undefined)
-	// 	message = Buffer.from(req.body.message)
+	if(mess != undefined)
+		message = Buffer.from(mess)
+
+	console.log({money, mess, receiver})
 
 	const cur_sequence = await sequence(user) + 1
 	const secretKey = deriveKey(secret)
@@ -48,7 +51,7 @@ const doPayment = async (money, mess, receiver) => {
 	    operation: "payment",
 	    params:{
 	    	address: receiver,
-	    	amount: money
+	    	amount: parseInt(money)
 	    },
 	    signature: new Buffer(64),
 	}

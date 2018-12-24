@@ -9,7 +9,7 @@ import Detail from './containers/detail'
 import Register from './components/register/index'
 import Login from './components/login'
 import SignUp from './components/signup'
-import Transaction from './components/transaction'
+import Transaction from './containers/payment'
 import NewFeed from './containers/newfeed'
 
 const checkAuth = () => {

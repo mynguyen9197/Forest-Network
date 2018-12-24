@@ -13,8 +13,8 @@ import '../App.css'
 class FollowersList extends Component {
 
 	componentDidMount(){
-	    this.props.loadFollowers()
-	    this.props.loadOwner()
+	    this.props.loadFollowers(localStorage.getItem('public'))
+	    this.props.loadOwner(localStorage.getItem('public'))
   	}
 
 	render(){

@@ -20,10 +20,6 @@ class Header extends Component {
       shared:'',
     }
   }
-
-  componentDidMount(){
-    console.log(this.props.name)
-  }
  
   onOpenModal = () => {
     this.setState({ open: true });

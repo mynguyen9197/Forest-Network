@@ -12,8 +12,8 @@ import { loadOwner } from '../actions/actionHome'
 
 class FollowingList extends Component {
 	componentDidMount(){
-	    this.props.dispatch(loadFollowing())
-	    this.props.dispatch(loadOwner())
+	    this.props.dispatch(loadFollowing(localStorage.getItem('public')))
+	    this.props.dispatch(loadOwner(localStorage.getItem('public')))
 
 	}
 
