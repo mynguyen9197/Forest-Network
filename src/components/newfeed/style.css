@@ -1,0 +1,134 @@
+.DashboardProfileCard {
+    border: 1px solid #e6ecf0;
+    background: #fff;
+    position: relative;
+    margin-bottom: 10px;
+    float: left;
+    width: 290px;
+    left: 75px;
+    margin-top: 7px;
+}
+
+.coverimg{
+	background-size: 100%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-position:50%;
+    width: 100%;
+    padding: 0;
+    height: 150px;
+}
+
+
+.avt{
+	background-color: #fff;
+    margin: -30px 0 0 8px;
+    padding: 1px;
+    vertical-align: bottom;
+    max-width: 100%;
+    border-radius: 50%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 5em;
+    width: 5em;
+    border: solid 0.1em white;
+    position: absolute;
+    left: 5px;
+    
+}
+
+
+.userFields{
+	position: absolute;
+    margin-top: 5px;
+    left: 90px;
+    width: 1px;
+}
+
+.nameowner{
+	font-weight: bold;
+    font-size: 14px;
+    line-height: 1px;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+    word-wrap: normal!important;
+    color: #000000;
+}
+
+.emailowner{
+    display: inline-block!important;
+    max-width: 100%;
+    font-size: 12px;
+    padding-right: 5px;
+    color: #66757f;
+}
+
+.ProfileCardStats {
+   margin-top: 55px;
+   margin-left: 15px;
+   margin-bottom: 15px;
+}
+
+.profile-fo{
+	width: 1%;
+	vertical-align: bottom;
+	display: table-cell;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1;
+    overflow: hidden;
+    transition: all .15s ease-in-out;
+    text-align: inherit;
+    color: #1DA1F2 !important;
+    text-decoration: none!important;
+   
+}
+
+.twe{
+	color: #657786;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .02em;
+    line-height: 16px;
+    overflow: hidden;
+    transition: color .15s ease-in-out;
+
+}
+
+.val{
+	display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 3px;
+    transition: color .15s ease-in-out;
+}
+
+.fwing{
+    color: #657786;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .02em;
+    line-height: 16px;
+    overflow: hidden;
+    transition: color .15s ease-in-out;
+}
+
+.fwers{
+    color: #657786;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .02em;
+    line-height: 16px;
+    overflow: hidden;
+    transition: color .15s ease-in-out;
+}
+
+.bodynewfeed{
+    margin-top: 45px;
+}
+
+.postsnewfeed{
+    margin-left: 1px;
+}
+

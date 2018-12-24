@@ -10,6 +10,7 @@ import Register from './components/register/index'
 import Login from './components/login'
 import SignUp from './components/signup'
 import Transaction from './components/transaction'
+import NewFeed from './containers/newfeed'
 
 const checkAuth = () => {
   const secret = localStorage.getItem('secret')
@@ -40,13 +41,14 @@ const App = () => (
   <Router>
       <Router>
         <Switch>
-          <AuthRoute exact path="/" component={Home} />
+          <AuthRoute exact path="/accounts/home" component={Home} />
           <AuthRoute exact path="/transactions" component={Transaction} />
           <AuthRoute exact path="/followers" component={Followers} />
           <AuthRoute exact path="/following" component={Following} />
           <AuthRoute exact path="/:account/status/:id" component={Detail} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp}/>
+          <Route exact path="/" component={NewFeed}/>
         </Switch>
       </Router>
   </Router>
