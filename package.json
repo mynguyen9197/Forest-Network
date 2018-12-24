@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "base32.js": "^0.1.0",
     "crypto-js": "^3.1.9-1",
+    "file-api": "^0.10.4",
+    "filereader": "^0.10.3",
     "node-sass": "^4.11.0",
     "react": "^16.6.3",
     "react-datepicker": "^2.0.0",

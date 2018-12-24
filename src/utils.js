@@ -26,3 +26,8 @@ export const sequence = async (address) => {
 	})
 	return cur_sequence
 }
+
+export const deriveKey = (key) => {
+	const decrypted = CryptoJS.AES.decrypt(key, "Secret Key")
+	return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8))
+}

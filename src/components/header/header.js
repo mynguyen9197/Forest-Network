@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import Modal from 'react-responsive-modal'
 import { connect } from 'react-redux'
 
-//import { postStatus } from '../../actions/actionHome'
+import { postStatus } from '../../actions/actionHome'
 
 import logo from './../../img/twitter.png'
 import './style.css';
@@ -19,6 +19,10 @@ class Header extends Component {
       open2: false,
       shared:'',
     }
+  }
+
+  componentDidMount(){
+    console.log(this.props.name)
   }
  
   onOpenModal = () => {
@@ -62,7 +66,7 @@ class Header extends Component {
   handleSubmit(e){
     const { status, shared } = this.state
     e.preventDefault()
-    //this.props.postStatus(status, shared)
+    this.props.postStatus(status, shared)
     this.setState({
       open: false,
       open2: true,
@@ -148,11 +152,11 @@ class Header extends Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         postStatus:(status, shared) => dispatch(postStatus(status, shared))
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        postStatus:(status, shared) => dispatch(postStatus(status, shared))
+    }
+}
 
-//export default withRouter(connect(null, mapDispatchToProps)(Header))
-export default withRouter (Header)
+export default withRouter(connect(null, mapDispatchToProps)(Header))
+//export default withRouter (Header)

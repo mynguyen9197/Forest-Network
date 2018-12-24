@@ -3,58 +3,16 @@ import { encode, decode, sign } from '../lib/tx'
 
 const secret = localStorage.getItem('secret')
 const user = localStorage.getItem('public')
-
+//'GDAAVIRUC7PII4YR5SZQHKBCY3PZDNN6XAORXRIXGLPNGSW7ECSRO5OZ'
 export const loadPost = () => {
-	// return dispatch => {
-	// 	return fetch(`/posts/getPost?account=${user}`)
-	// 	.then(response => {
-	// 		response.json()
-	// 		.then(result => {
-	// 			console.log(result[0])
-	// 			dispatch({ type: 'LOAD_POSTS', posts: []})
-	// 		})
-	// 	}).catch(err => dispatch({ type: 'LOAD_POSTS_ERROR', err }))
-	// }
-	return {
-		type: 'LOAD_POSTS',
-		posts: [
-			{ 
-				id: 1,
-				urlAvatar: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep-doc-dao-nhat-29.jpg",
-				name: "Tran Thanh Trung",
-				statusPost: "publicly",
-				timePost: 10,
-				content: "I am the best",
-				urlPhoto: "https://i.ytimg.com/vi/eXcWnvxK7Z8/hqdefault.jpg",
-				react: 100,
-				comment: 200,
-				share: 10,
-			},
-			{
-				id: 2,
-				urlAvatar: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep-doc-dao-nhat-29.jpg",
-				name: "Cristinal Ronaldo",
-				statusPost: "privately",
-				timePost: 20,
-				content: "Messi! I am not so good",
-				urlPhoto: "../../img/twitter.png",
-				react: 200,
-				comment: 100,
-				share: 10,
-			},
-			{ 
-				id: 3,
-				urlAvatar: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep-doc-dao-nhat-29.jpg",
-				name: "Chi Pu",
-				statusPost: "publicly",
-				timePost: 20,
-				content: "Anh xin lỗi em đi",
-				urlPhoto: "https://i.ytimg.com/vi/eXcWnvxK7Z8/hqdefault.jpg",
-				react: 100,
-				comment: 100,
-				share: 100,
-			},
-		]
+	return dispatch => {
+		return fetch(`/getPost?account=${user}`)
+		.then(response => {
+			response.json()
+			.then(result => {
+				dispatch({ type: 'LOAD_POSTS', posts: result.post})
+			})
+		}).catch(err => dispatch({ type: 'LOAD_POSTS_ERROR', err }))
 	}
 }
 
@@ -83,86 +41,64 @@ export const loadRecommand = () => {
 }
 
 export const loadOwner = () => {
-	return {
-		type: 'LOAD_OWNER', owner:[]
-	}
-
 	// return dispatch => {
-	// 	return fetch(`/users/profile?account=${user}`)
+	// 	return fetch(`/users/getInf?account=${user}`)
 	// 	.then(response => {
 	// 		response.json()
 	// 		.then(result => {
-	// 			dispatch({ type: 'LOAD_OWNER', owner:result[0] })
+	// 			//console.log(result)
+	// 			dispatch({ type: 'LOAD_OWNER', owner:result })
 	// 		})
 	// 	}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
 	// }	
+	return dispatch => {
+		return fetch(`/users/get?account=${user}`)
+		.then(response => {
+			response.json()
+			.then(result => {
+				console.log(result[0])
+				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
+			})
+		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
+	}	
 }
-
-// return dispatch => {
-// 		return fetch("/posts/getPost", {
-// 		  method: 'POST',
-// 		  body: JSON.stringify({publicKey: 'GCNLX2ZPPNRPX2IQSJSX73VGFN6O5ZQJ3CBFCA6Q6NTBKLKRA2ZKJHE7'}), // điền public key của mình vào đây
-// 		  headers:{
-// 		    'Content-Type': 'application/json'
-// 		  }
-// 		}).then(response => {
-// 			response.json()
-// 			.then(result => {
-// 				console.log(result[0])
-// 				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
-// 			})
-// 		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
-// 	}
 
 export const postStatus = (content, shareWith) => {
-	// return dispatch => {
-	// 	return fetch("/posts/post", {
-	// 	  method: 'POST',
-	// 	  body: JSON.stringify({publicKey: }), // điền public key của mình vào đây
-	// 	  headers:{
-	// 	    'Content-Type': 'application/json'
-	// 	  }
-	// 	}).then(response => {
-	// 		response.json()
-	// 		.then(result => {
-	// 			console.log(result[0])
-	// 			dispatch({ type: 'POST_STATUS', owner:[] })
-	// 		})
-	// 	}).catch(err => dispatch({ type: 'POST_ERROR', err }))
-	// }
-	console.log({content, shareWith})
-	return{
-		type: 'POST_STATUS',
-		result: {
-			content, shareWith
-		}
+	return dispatch => postContent(content, shareWith)
+	.then(response =>{
+		return fetch("/transaction", {
+		  method: 'POST',
+		  body: JSON.stringify({encoded: response}),
+		  headers:{
+		    'Content-Type': 'application/json'
+		  }
+		}).then(response => {
+				dispatch({ type: 'POST_STATUS' })
+			})
+		}).catch(err => dispatch({ type: 'POST_ERROR', err }))
 	}
+
+const postContent = async (content, shareWith) => {
+
+	const cur_sequence = await sequence(user) + 1
+	const secretKey = deriveKey(secret)
+	const tx = {
+		version: 1,
+	    account: user,
+	    sequence: cur_sequence,
+	    memo: Buffer.alloc(0),
+	    operation: "post",
+	    params:{
+	    	keys: [],
+	     	content:{
+	     		type: 1,
+	     		text: content
+	     	}
+	    },
+	    signature: new Buffer(64),
+	}
+
+	sign(tx, secretKey)
+	let post = '0x' + encode(tx).toString('hex')
+	return post
 }
-
-// const postContent = async (req) => {
-// 	const cur_sequence = await sequence(user) + 1
-
-// 	const tx = {
-// 		version: 1,
-// 	    account: user,
-// 	    sequence: cur_sequence,
-// 	    memo: Buffer.alloc(0),
-// 	    operation: "post",
-// 	    params:{
-// 	    	keys: shareWith,
-// 	     	content:{
-// 	     		type: 1,
-// 	     		text: content
-// 	     	}
-// 	    },
-// 	    signature: new Buffer(64),
-// 	}
-
-// 	sign(tx, secret)
-// 	var post = encode(tx).toString('hex')
-// 	post = '0x' + post
-
-// 	var url = server + `broadcast_tx_commit?tx=${post}`
-// 	return tx
-// 	//axios.get(url).then(res => console.log(res))
-// }

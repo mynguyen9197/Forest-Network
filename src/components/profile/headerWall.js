@@ -30,8 +30,8 @@ class HeaderWall extends Component {
                             <div className="item"> Followers </div>
                             <div className="value"> {this.props.owner.followers} </div>
                         </Link>
-                        <Link to="/" className="profile-item">
-                            <div className="item"> Likes </div>
+                        <Link to="/transactions" className="profile-item">
+                            <div className="item"> Transactions </div>
                             <div className="value"> {this.props.owner.like} </div>
                         </Link>
                         <button onClick={this.editProfile} className="bt-follow">Edit profile</button>

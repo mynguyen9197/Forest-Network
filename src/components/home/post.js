@@ -6,13 +6,13 @@ function Post(props) {
   return (
     <div className="post" id="opacity">
       <div className="owner">
-        <img src={props.infoPost.urlAvatar} alt="" />
+        <img src={props.owner.urlAvatar} alt="" />
         <div className="info-post">
-          <div className="name"> {props.infoPost.name} </div>
+          <div className="name"> {props.owner.name} </div>
           <div className="time-post">Shared <span>&nbsp;{props.infoPost.statusPost}</span>&nbsp;-&nbsp;<span> about {props.infoPost.timePost} minutes ago </span> </div>
         </div>
       </div>
-      <div className="content-post" cols="50">{props.infoPost.content}</div>
+      <div className="content-post" cols="50">{props.infoPost.text}</div>
       <img className="img-post" src={props.infoPost.urlPhoto} alt="" />
       <div className="attention">
         <div className="react"><i className="far fa-heart fa-heart-check" aria-hidden="true"></i> {props.infoPost.react}</div>
@@ -22,6 +22,5 @@ function Post(props) {
     </div>
   );
 }
-
 
 export default Post;

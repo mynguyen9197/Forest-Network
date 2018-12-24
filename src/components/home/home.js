@@ -26,15 +26,16 @@ class Home extends Component {
   	}																
 
 	render(){
-		console.log(this.state.response)
+
 		return (
 			<React.Fragment>
-				<Header owner={this.props.owner}/>
+				<Header owner={this.props.owner} />
 				<HeaderWall owner={this.props.owner}/>
 				<div className="content">
 					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit} />
 					<div>
-						{ this.props.posts.map((item, i) => <Post infoPost={item}/>)}
+						{ this.props.posts.map((item, i) => {
+							if(item.type===1) return <Post infoPost={item} owner={this.props.owner}/>})}
 					</div>
 					<Recommand recommands={this.props.recommands}/>
 				</div>

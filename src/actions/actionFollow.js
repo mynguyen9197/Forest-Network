@@ -1,4 +1,9 @@
-import { deriveKey } from '../utils'
+import { deriveKey, sequence, server } from '../utils'
+import { encode, decode, sign } from '../lib/tx'
+import base32 from "base32.js"
+
+const secret = localStorage.getItem('secret')
+const user = localStorage.getItem('public')
 
 export const loadFollowers = () => {
 	return {
@@ -74,21 +79,46 @@ export const loadFollowing = () => ({
 	]
 })
 
-// export const doFollow = (account) => ({
-// 	const { user, secret } = deriveKey()
-// 	return dispatch => {
-// 		return fetch("/transaction", {
-// 		  method: 'POST',
-// 		  body: JSON.stringify({publicKey: publicKey, account: account}),
-// 		  headers:{
-// 		    'Content-Type': 'application/json'
-// 		  }
-// 		}).then(response => {
-// 			response.json()
-// 			.then(result => {
-// 				console.log(result[0])
-// 				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
-// 			})
-// 		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
-// 	}
-// })
+export const followSO = (acc) => {
+	return dispatch => follow(acc)
+	.then(response =>{
+		return fetch("/transaction", {
+		  method: 'POST',
+		  body: JSON.stringify({encoded: response}),
+		  headers:{
+		    'Content-Type': 'application/json'
+		  }
+		}).then(response => {
+				dispatch({ type: 'DO_FOLLOW' })
+			})
+		}).catch(err => dispatch({ type: 'FOLLOW_ERROR', err }))
+	}
+
+const follow = async (acc) => {
+	let arr = []
+	const cur_sequence = await sequence(user) + 1
+	const secretKey = deriveKey(secret)
+
+	acc.forEach(rev => {
+		arr.push(Buffer.from(base32.decode(rev)))
+	})
+
+	const tx = {
+		version: 1,
+	    account: user,
+	    sequence: cur_sequence,
+	    memo: Buffer.alloc(0),
+	    operation: "update_account",
+	    params:{
+	    	key: "followings",
+	    	value: {
+	    		addresses: arr
+	    	}
+	    },
+	    signature: new Buffer(64),
+	}
+	sign(tx, secretKey)
+
+	const update = "0x" + encode(tx).toString('hex')
+	return update
+}
