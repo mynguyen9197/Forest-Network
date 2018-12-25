@@ -5,7 +5,6 @@ import './App.css'
 import Followers from './containers/followers'
 import Following from './containers/following'
 import Home from './containers/home'
-import Detail from './containers/detail'
 import Register from './components/register/index'
 import Login from './components/login'
 import SignUp from './components/signup'
@@ -41,11 +40,10 @@ const App = () => (
   <Router>
       <Router>
         <Switch>
-          <AuthRoute exact path="/accounts/home" component={Home} />
+          <AuthRoute exact path="/accounts/:id" component={Home} />
           <AuthRoute exact path="/transactions" component={Transaction} />
           <AuthRoute exact path="/followers" component={Followers} />
           <AuthRoute exact path="/following" component={Following} />
-          <AuthRoute exact path="/:account/status/:id" component={Detail} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/" component={NewFeed}/>

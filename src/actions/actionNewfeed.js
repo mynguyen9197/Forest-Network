@@ -92,6 +92,12 @@ export const loadRecommand = () => {
 	}
 }
 
+export const loadNewFeed = () => {
+	return {
+		type: 'LOAD_NEWS_FEED',
+		posts: []
+	}
+}
 
 export const loadOwner = () => {
 	return {

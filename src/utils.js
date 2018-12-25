@@ -4,13 +4,25 @@ import axios from 'axios'
 
 import { decode, encode, sign } from './lib/tx'
 
-export const server = "https://komodo.forest.network/"
+export const server = "https://gorilla.forest.network/"
 
 export const sequence = async (address) => {
 	var cur_sequence = 0
+	var total_count = 0
 	var urlUser = server + `tx_search?query="account='${address}'"`
 
 	await axios.get(urlUser).then( res => {
+		total_count = res.data.result.total_count
+	})
+
+	var tmp = 0
+	if( total_count%30 !== 0)
+		tmp = 1
+
+	urlUser = server + `tx_search?query="account='${address}'"&page=${parseInt(total_count/30) + tmp}`
+
+	await axios.get(urlUser).then( res => {
+		
 		var tmp = res.data.result.txs
 		for(var i = tmp.length - 1 ; i >= 0; i--)
 		{
@@ -24,6 +36,7 @@ export const sequence = async (address) => {
 				cur_sequence = 0
 		}
 	})
+
 	return cur_sequence
 }
 

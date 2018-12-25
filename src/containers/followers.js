@@ -13,7 +13,7 @@ import '../App.css'
 class FollowersList extends Component {
 
 	componentDidMount(){
-	    this.props.loadFollowers(localStorage.getItem('public'))
+	    this.props.loadFollowers()
 	    this.props.loadOwner(localStorage.getItem('public'))
   	}
 
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return{
 		loadFollowers: () => dispatch(loadFollowers()),
-    	loadOwner: () => dispatch(loadOwner()),
+    	loadOwner: (user) => dispatch(loadOwner(user)),
 	}
 }
 

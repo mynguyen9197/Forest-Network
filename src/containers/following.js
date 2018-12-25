@@ -5,14 +5,14 @@ import PersonList from '../components/follow/combine'
 import Header from '../components/header/header'
 import HeaderWall from '../components/profile/headerWall'
 import InfoOwner from '../components/profile/infoOwner'
-import { loadFollowing } from '../actions/actionFollow'
+import { loadFollows } from '../actions/actionFollow'
 import { loadOwner } from '../actions/actionHome'
 
 
 
 class FollowingList extends Component {
 	componentDidMount(){
-	    this.props.dispatch(loadFollowing(localStorage.getItem('public')))
+	    this.props.dispatch(loadFollows())
 	    this.props.dispatch(loadOwner(localStorage.getItem('public')))
 
 	}

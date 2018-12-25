@@ -6,14 +6,14 @@ import { FileAPI } from 'file-api'
 const secret = localStorage.getItem('secret')
 const user = localStorage.getItem('public')
 
-export const updateProfile = (username, displayName, dob, location, website, bio, datejoin) => {
-	return {
-		type: 'LOAD_PROFILE',
-		profile: {
-			username, displayName, dob, location, website, bio, datejoin
-		}
-	}
-}
+// export const updateProfile = (username, displayName, dob, location, website, bio, datejoin) => {
+// 	return {
+// 		type: 'LOAD_PROFILE',
+// 		profile: {
+// 			username, displayName, dob, location, website, bio, datejoin
+// 		}
+// 	}
+// }
 
 export const flatEdit = (bool) => {
 	return {
@@ -32,13 +32,13 @@ export const renameAction = (name) => {
 		    'Content-Type': 'application/json'
 		  }
 		}).then(response => {
-				dispatch({ type: 'RENAME' })
+				dispatch({ type: 'RENAME', response })
 			})
 		}).catch(err => dispatch({ type: 'RENAME_ERROR', err }))
 	}
 
 export const changeAvatar = (file) => {
-	return dispatch => rename(file)
+	return dispatch => picture(file)
 	.then(response =>{
 		return fetch("/transaction", {
 		  method: 'POST',

@@ -18,6 +18,7 @@ class Header extends Component {
       status: '',
       open2: false,
       shared:'',
+      search: '',
     }
   }
  
@@ -76,13 +77,18 @@ class Header extends Component {
     })
   }
 
+  handleSearch(e){
+    this.setState({
+      search: e.target.value
+    })
+  }
+
   render(){
     return (
       <div className="header" >
         <Link to="/"><img className="logoApp" src={logo} alt="" /></Link> 
-        <Link to="/" className="link"> Notifications </Link>
-        <Link to="/" className="link"> Messages </Link>
-        <input className="search" placeholder="Search"/>
+        <Link to="/notification" className="link"> Notifications </Link>
+        <input className="search" placeholder="Search" onChange={this.handleSearch.bind(this)}/>
         
         <div class="dropdown">
           <button data-toggle="dropdown"><img className="logo" src={this.props.owner.urlAvatar} alt="" /></button>

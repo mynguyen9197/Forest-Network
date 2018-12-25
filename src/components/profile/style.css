@@ -58,6 +58,7 @@
     transition: bottom .3s;
     z-index: 1;
     flex-grow: 1;
+    overflow: hidden;
 }
 
 .profile-items{
@@ -266,4 +267,41 @@ textarea{
 .bt-save{
     color: #1DA1F2;
     border: solid 1px #1DA1F2;
+}
+
+.hover-change{
+    text-align: center;
+    border-style: 2px solid
+}
+
+.hover-change{
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 200px;
+    display: none;
+    padding: 50px;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    height: 80px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.relative {
+    display: fixed;
+}
+
+.relative:hover .hover-change{
+    display: block; 
+    background-color: #1d2129;
+    color: #fff;
+    font-weight: 700;
+    font-family: inherit;
+    overflow: hidden;
+}
+
+.relative:hover img{
+    opacity: 0.1; 
 }

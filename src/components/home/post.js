@@ -1,46 +1,23 @@
-import React, { Component } from 'react';
-import Comment from './comment.js';
+import React, { Component } from 'react'
+import Comment from './comment.js'
+import { Link } from 'react-router-dom'
 
 import './style.css';
 
-// <<<<<<< HEAD
-// function Post(props) {
-//   return (
-//     <div className="post" id="opacity">
-//       <div className="owner">
-//         <img src={props.owner.urlAvatar} alt="" />
-//         <div className="info-post">
-//           <div className="name"> {props.owner.name} </div>
-//           <div className="time-post">Shared <span>&nbsp;{props.infoPost.statusPost}</span>&nbsp;-&nbsp;<span> about {props.infoPost.timePost} minutes ago </span> </div>
-//         </div>
-//       </div>
-//       <div className="content-post" cols="50">{props.infoPost.text}</div>
-//       <img className="img-post" src={props.infoPost.urlPhoto} alt="" />
-//       <div className="attention">
-//         <div className="react"><i className="far fa-heart fa-heart-check" aria-hidden="true"></i> {props.infoPost.react}</div>
-//         <div className="cmt"><span>{props.infoPost.comment}</span> Comments</div>
-//         <div><span>{props.infoPost.share}</span> Shares</div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// =======
 class Post extends Component{
     constructor(props){
         super(props)
         this.state={
             isReact:false,
-            isComment:false
+            isComment:false,
+            publicKey: this.props.account
         }
-        
     }
 
     onClickReact(){
         this.setState({
             isReact:true
         })
-        
     }
 
     onClickDisReact(){
@@ -53,7 +30,6 @@ class Post extends Component{
         this.setState({
             isComment:true
         })
-        
     }
 
     render(){
@@ -62,7 +38,7 @@ class Post extends Component{
             <div className="owner">
                 <img src={this.props.owner.urlAvatar} alt="" />
                 <div className="info-post">
-                    <div className="name"> {this.props.owner.name} </div>
+                    <Link to={`/accounts/${this.state.publicKey}`} className="name"> {this.props.owner.name} </Link>
                     <div className="time-post">Shared <span>&nbsp;{this.props.infoPost.statusPost}</span>&nbsp;-&nbsp;<span> about {this.props.infoPost.timePost} minutes ago </span> </div>
                 </div>
             </div>

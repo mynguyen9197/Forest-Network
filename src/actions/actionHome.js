@@ -103,3 +103,10 @@ const postContent = async (content, shareWith) => {
 	let post = '0x' + encode(tx).toString('hex')
 	return post
 }
+
+export const loadAllAcc = () => {
+	return {
+		type: 'LOAD_ALL',
+		allpeople: []
+	}
+}

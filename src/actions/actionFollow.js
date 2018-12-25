@@ -79,6 +79,19 @@ export const loadFollowing = () => ({
 	]
 })
 
+export const loadFollows = () => {
+	return dispatch => {
+		return fetch(`/users/followers?account=${user}`)
+		.then(response => {
+			response.json()
+			.then(result => {
+				console.log(result.follower)
+				dispatch({ type: 'LOAD_FOLLOWING', following: result.follower})
+			})
+		}).catch(err => dispatch({ type: 'LOAD_FOLLOWING_ERROR', err }))
+	}
+}
+
 export const followSO = (acc) => {
 	return dispatch => follow(acc)
 	.then(response =>{

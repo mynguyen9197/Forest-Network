@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import './style.css';
+import React, { Component } from 'react'
+import './style.css'
+import { Link } from 'react-router-dom'
 
 class Person extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			isFollowing: this.props.isFollowing
+			isFollowing: this.props.isFollowing,
 		}
 	}
 
@@ -18,13 +19,13 @@ class Person extends Component {
 	render(){
 		return (
        		<div className="ProfileCard">
-	  			<a className="ProfileCard-bg" href={this.props.follow.username} style={{background: `url(${this.props.follow.coverPhoto})`}}>
-	  			</a>
+	  			<Link to={`/accounts/${this.props.follow}`} className="ProfileCard-bg" style={{background: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRTtY1L05JaQBl_WKkjh6cB1sZlov7h086zcpCekmsPoGATf1noQ")`}}>
+	  			</Link>
 
 	  			<div className="ProfileCard-content">
-	    			<a className="ProfileCard-avatarLink js-nav js-tooltip" href="/ThuHngNguyn13" tabindex="-1" aria-hidden="true">
-	      				<img className="ProfileCard-avatarImage js-action-profile-avatar" src={this.props.follow.profilePhoto} alt="" />
-	    			</a>
+	    			<Link to={`/accounts/${this.props.follow}`} className="ProfileCard-avatarLink js-nav js-tooltip">
+	      				<img className="ProfileCard-avatarImage js-action-profile-avatar" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png" alt="" />
+	    			</Link>
 	    
 	      			<div className="ProfileCard-actions">
 	        			<div className="ProfileCard-userActions with-rightCaret js-userActions">
@@ -58,14 +59,14 @@ class Person extends Component {
 				    <div className="ProfileCard-userFields">
 				      <div className="ProfileNameTruncated account-group">
 				  		<div className="u-textTruncate u-inlineBlock">
-				    		<a className="fullname ProfileNameTruncated-link u-textInheritColor js-nav" href="/ThuHngNguyn13" data-aria-label-part="">
-				      			{this.props.follow.displayName}</a></div><span className="UserBadges"></span>
+				    		<Link to={`/accounts/${this.props.publicKey}`} className="fullname ProfileNameTruncated-link u-textInheritColor js-nav">
+				      			{this.props.follow.displayName}</Link></div><span className="UserBadges"></span>
 				      </div>
 				      
 				      <span className="ProfileCard-screenname">
-				        <a href="/ThuHngNguyn13" className="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part="">
+				        <Link to={`/accounts/${this.props.follow}`} className="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part="">
 				          <span className="username u-dir" dir="ltr">@<b className="u-linkComplex-target">{this.props.follow.username}</b></span>
-				        </a><span>‏</span> {this.props.isFollower || this.props.follow.followed?<span className="FollowStatus">Follows you</span>:<span></span>}
+				        </Link><span>‏</span> {this.props.isFollower || this.props.follow.followed?<span className="FollowStatus">Follows you</span>:<span></span>}
 				      </span>
 				      
 				      <p className="ProfileCard-bio u-dir" dir="ltr" data-aria-label-part="">{this.props.follow.profileBio}</p>
