@@ -40,8 +40,13 @@ const InteractParams = vstruct([
   { name: 'object', type: vstruct.Buffer(32) },
   // Encrypt with same post key (if any)
   // Depend on object on parent object keys. First 16 bytes of content are nonce/iv
-  { name: 'content', type: vstruct.VarBuffer(vstruct.UInt16BE) },
+  { name: 'content',  type: vstruct.VarBuffer(vstruct.UInt16BE) },
   // React if '', like, love, haha, anrgy, sad, wow
+]);
+
+const ReactContent = vstruct([
+  { name: 'type', type: vstruct.UInt8 },
+  { name: 'reaction', type: vstruct.UInt8 },
 ]);
 
 const PlainTextContent = vstruct([
@@ -55,6 +60,14 @@ const Followings = vstruct([
 
 function decodePost(tx) {
   return PlainTextContent.decode(tx);
+}
+
+function decodeComment(tx) {
+  return PlainTextContent.decode(tx);
+}
+
+function decodeReact(tx) {
+  return ReactContent.decode(tx);
 }
 
 function decodeFollowing(tx){
@@ -94,7 +107,6 @@ function encode(tx) {
 
     case 'update_account':
       if(tx.params.key === 'followings'){
-        console.log("OK");
         params = UpdateAccountParams.encode({
           ...tx.params,
           value: Followings.encode(tx.params.value)
@@ -107,10 +119,22 @@ function encode(tx) {
       break;
 
     case 'interact':
-      params = InteractParams.encode({
-        ...tx.params,
-        object: Buffer.from(tx.params.object, 'hex'),
-      });
+      if(tx.params.content.type == 1)
+      {
+        params = InteractParams.encode({
+          ...tx.params,
+          object: Buffer.from(tx.params.object, 'hex'),
+          content: PlainTextContent.encode(tx.params.content)
+        });
+      }
+      if(tx.params.content.type == 2)
+      {
+        params = InteractParams.encode({
+          ...tx.params,
+          object: Buffer.from(tx.params.object, 'hex'),
+          content: ReactContent.encode(tx.params.content)
+        });
+      }
       operation = 5;
       break;
 
@@ -180,4 +204,4 @@ function decode(data) {
   };
 }
 
-export { encode, decode, decodePost, decodeFollowing };
+export { encode, decode, decodePost, decodeFollowing, decodeComment, decodeReact };

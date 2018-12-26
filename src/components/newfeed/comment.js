@@ -3,20 +3,25 @@ import './style.css';
 
 class Comment extends Component{
 	render(){
+		var vals
+		for( var i = 0 ; i < this.props.infoOnwer.length; i++)
+        {
+            if(this.props.infoOnwer[i].publicKey == this.props.infoComment.account && this.props.infoOnwer[i].Avatar)
+            {
+                let bufferOriginal = Buffer.from(this.props.infoOnwer[i].Avatar);
+                vals = bufferOriginal.toString('base64')
+            }
+        }
+
 		return(
 			<div className="comment">
 				<div className="avatarComment">
-					<img className="imgAvatarCmt" src="https://cdn.explus.vn/media.phunutoday.vn/files/upload_images/2016/07/19/nuoi-con-1.jpg" alt=""/>
+                    <img className="imgAvatarCmt" src={'data:image/jpeg;base64,' + vals} />
 				</div>
-				<div className="boxComment">
-					<form className="formCmt">	
+				<div className="boxComment">	
 						<div className="contentCmt">
-							<div className="1p1t">
-								<input className="_1p1v" id="placeholder-621fa" style={{whiteSpace:`pre-wrap`}} placeholder="Write a comment..."/>
-							</div>
+							{this.props.infoComment.text}
 						</div>
-						
-					</form>
 				</div>
 			</div>
 		);
