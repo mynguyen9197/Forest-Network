@@ -17,9 +17,8 @@ class HeaderWall extends Component {
             isFollowing: false,
             user: this.props.account,
             isEdit: false,
-            file: this.props.owner.urlAvatar,
+            file: null,
             open: false,
-            file: '',imagePreviewUrl: '',
             listFollow: this.props.owner.following,
         }
     }
@@ -52,16 +51,24 @@ class HeaderWall extends Component {
     handleClick(e){
         e.preventDefault()
         this.setState({
-            open: true
+            open: true,
+            file: ''
         })
     }
 
-    uploadHandler(){
-        alert(this.state.file)
+    handleChange(e){
+        this.setState({
+          file: URL.createObjectURL(e.target.files[0])
+        })
+    }
+
+    handleSave(e){
+        e.preventDefault()
+        console.log(this.state.file)
     }
 
     componentWillmount(){
-        for(let i =0;i<this.props.followers.length;i++){
+        for(let i =0;i<this.props.curUser.following.length;i++){
             if(this.props.followers[i] === localStorage.getItem('public'))
             {
                 this.setState({
@@ -80,6 +87,13 @@ class HeaderWall extends Component {
         //         break;
         //     }
         // }
+
+        var vals = ''
+        if(this.props.curUser.Avatar)
+            {
+                let bufferOriginal = Buffer.from(this.props.curUser.Avatar)
+                vals = bufferOriginal.toString('base64')
+            }
         
         return (
             <div className="header-wall">
@@ -87,7 +101,7 @@ class HeaderWall extends Component {
                 <div className="info">
                     
                     <div className="relative">
-                        <a href="#" onClick={this.handleClick.bind(this)}><img className="avatar" src={this.props.owner.Avatar} alt="" /></a>
+                        <a href="#" onClick={this.handleClick.bind(this)}><img className="avatar" src={'data:image/jpeg;base64,' + vals} /> </a>
                         <div className="hover-change">
                             <a href="#" >
                             <div className="">
@@ -117,7 +131,12 @@ class HeaderWall extends Component {
                     </div>}
                 </div>
                     <Modal open={this.state.open} onClose={this.onCloseModal.bind(this)} top>
-                         
+                          <div>
+                            <input type="file" onChange={this.handleChange.bind(this)}/>
+                            <button type="button" class="btn btn-primary" onClick={this.handleSave.bind(this)}>Basic</button>
+                            <img src={this.state.file}/>
+                          </div>
+
                     </Modal>
             </div>
         );

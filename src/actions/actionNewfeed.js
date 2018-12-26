@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const loadPost = () => {
+	
 	return {
 		type: 'LOAD_POSTS',
 		posts: [

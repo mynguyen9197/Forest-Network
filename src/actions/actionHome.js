@@ -3,16 +3,15 @@ import { encode, decode, sign } from '../lib/tx'
 
 const secret = localStorage.getItem('secret')
 const pub = localStorage.getItem('public')
-//'GDAAVIRUC7PII4YR5SZQHKBCY3PZDNN6XAORXRIXGLPNGSW7ECSRO5OZ'
+
 export const loadPost = (user) => {
-	console.log(user)
 	return dispatch => {
 		return fetch(`/v2/getPost?account=${user}`)
 		.then(response => {
 			response.json()
 			.then(result => {
 				//console.log(result.post)
-				dispatch({ type: 'LOAD_POSTS', posts: result.post})
+				dispatch({ type: 'LOAD_POSTS', posts: result.posts})
 			})
 		}).catch(err => dispatch({ type: 'LOAD_POSTS_ERROR', err }))
 	}
@@ -21,24 +20,7 @@ export const loadPost = (user) => {
 export const loadRecommand = () => {
 	return {
 		type: 'LOAD_RECOMMAND',
-		recommands: [
-			{ 
-				urlAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4dgEBvMj80Lr0CytLDVkeISTT-Za95gBOH92rhboiD843yjm",
-				name: "Chi Pu",
-			},
-			{
-				urlAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4dgEBvMj80Lr0CytLDVkeISTT-Za95gBOH92rhboiD843yjm",
-				name: "Tăng Thanh Hà",
-			},
-			{ 
-				urlAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4dgEBvMj80Lr0CytLDVkeISTT-Za95gBOH92rhboiD843yjm",
-				name: "Cậu vàng",
-			},
-			{
-				urlAvatar: "https://pbs.twimg.com/profile_images/973388045717155840/tk88NJtI_bigger.jpg",
-				name: "Lão Hạc",
-			}
-		]
+		recommands: []
 	}
 }
 

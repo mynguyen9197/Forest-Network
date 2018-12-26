@@ -5,6 +5,7 @@ import Modal from 'react-responsive-modal'
 import { connect } from 'react-redux'
 
 import { postStatus } from '../../actions/actionHome'
+import { loadCurUser } from '../../actions/actionFollow'
 
 import logo from './../../img/twitter.png'
 import './style.css';
@@ -84,16 +85,23 @@ class Header extends Component {
   }
 
   render(){
+    var vals = ''
+    if(this.props.curUser.Avatar)
+        {
+            let bufferOriginal = Buffer.from(this.props.curUser.Avatar)
+            vals = bufferOriginal.toString('base64')
+        }
+        
     return (
       <div className="header" >
-        <Link to="/"><img className="logoApp" src={logo} alt="" /></Link> 
+        <Link to={`/following/${localStorage.getItem('public')}`}><img className="logoApp" src={logo} alt="" /></Link> 
         <Link to="/notification" className="link"> Notifications </Link>
         <input className="search" placeholder="Search" onChange={this.handleSearch.bind(this)}/>
         
         <div class="dropdown">
-          <button data-toggle="dropdown"><img className="logo" src={this.props.owner.urlAvatar} alt="" /></button>
+          <button data-toggle="dropdown"><img className="logo" src={'data:image/jpeg;base64,' + vals} alt="" /></button>
           <ul class="dropdown-menu">
-            <li><Link to={`/${this.props.owner.publicKey}`}>{this.props.owner.name}</Link></li>
+            <li><Link to={`/following/${this.props.owner.publicKey}`}>{this.props.owner.name}</Link></li>
             <li><a className="link" onClick={this.handleClick.bind(this)}> Sign out </a></li>
           </ul>
         </div>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -156,9 +164,16 @@ class Header extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        postStatus:(status, shared) => dispatch(postStatus(status, shared))
+        postStatus:(status, shared) => dispatch(postStatus(status, shared)),
+        loadCurUser: () => dispatch(loadCurUser())
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(Header))
+const mapStateToProps = (state) => {
+  return {
+    curUser: state.curUser.curUser,
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))
 //export default withRouter (Header)

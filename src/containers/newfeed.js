@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts.posts,
     recommands: state.recommands.recommands,
-     owner: state.owner.owner,
+    owner: state.owner.owner,
   }
 }
 

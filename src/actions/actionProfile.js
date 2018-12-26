@@ -6,15 +6,6 @@ import { FileAPI } from 'file-api'
 const secret = localStorage.getItem('secret')
 const user = localStorage.getItem('public')
 
-// export const updateProfile = (username, displayName, dob, location, website, bio, datejoin) => {
-// 	return {
-// 		type: 'LOAD_PROFILE',
-// 		profile: {
-// 			username, displayName, dob, location, website, bio, datejoin
-// 		}
-// 	}
-// }
-
 export const flatEdit = (bool) => {
 	return {
 		type: 'FLAT_EDIT',

@@ -18,11 +18,12 @@ class Person extends Component {
 	}
 
 	render(){
-		// if(this.props.follow.avatar!=='undefine'){
-		// 	let bufferOriginal = Buffer.from(this.props.follow.avatar)
-  //           const vals = bufferOriginal.toString('base64')
-		// }
-  //       	console.log(this.props.follow.avatar)
+		var vals = ''
+        if(this.props.follow.avatar)
+            {
+                let bufferOriginal = Buffer.from(this.props.follow.avatar)
+                vals = bufferOriginal.toString('base64')
+            }
 		return (
        		<div className="ProfileCard">
 	  			<Link to={`/following/${this.props.follow.publicKey}`} className="ProfileCard-bg" style={{background: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRTtY1L05JaQBl_WKkjh6cB1sZlov7h086zcpCekmsPoGATf1noQ")`}}>
@@ -31,7 +32,7 @@ class Person extends Component {
 	  			<div className="ProfileCard-content">
 	    			<Link to={`/following/${this.props.follow.publicKey}`} className="ProfileCard-avatarLink js-nav js-tooltip">
 	      				{!this.props.follow.avatar?<img className="ProfileCard-avatarImage js-action-profile-avatar" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png" alt="" />:
-	      				<img className="ProfileCard-avatarImage js-action-profile-avatar" src={this.props.follow.avatar} alt="" />}
+	      				<img className="ProfileCard-avatarImage js-action-profile-avatar" src={'data:image/jpeg;base64,' + vals} alt="" />}
 	    			</Link>
 	    
 	      			<div className="ProfileCard-actions">

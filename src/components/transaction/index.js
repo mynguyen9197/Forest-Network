@@ -112,6 +112,7 @@ class Transacion extends Component {
 							        <th>Số thứ tự</th>
 							        <th>Người nhận</th>
 							        <th>Số tiền</th>
+							        <th>Thời gian</th>
 							      </tr>
 							    </thead>
 							    <tbody>
@@ -127,6 +128,7 @@ class Transacion extends Component {
 							        <th>Số thứ tự</th>
 							        <th>Người gửi</th>
 							        <th>Số tiền</th>
+							        <th>Thời gian</th>
 							      </tr>
 							    </thead>
 							    <tbody>
@@ -193,6 +195,9 @@ const TransRow = (props) => {
       </td>
       <td>
         { props.data.amount }
+      </td>
+      <td>
+        { props.data.date }
       </td>
     </tr>
   );

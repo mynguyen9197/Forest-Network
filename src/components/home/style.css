@@ -1,3 +1,6 @@
+i{
+	padding: 0 3px 0 0 !important;
+}
 .post{
 	width: 35em;
 	background-color: white;
@@ -38,13 +41,15 @@
 	display: flex;
 }
 .attention{
+	display: flex;
 	margin: 0.5em 0 0.5em 0;
+	justify-content: space-around;
 }
 .react{
-	margin-left: 0.4em;
-	margin-right: 4em;
+	text-align: center;
 	height: 30px;
-	width: 110px;
+	line-height: 30px;
+	width: 130px;
 }
 
 .react:hover{
@@ -54,9 +59,10 @@
 
 
 .cmt{
-	margin-right: 7em;
+	text-align: center;
 	height: 30px;
-	width: 110px;
+	line-height: 30px;
+	width: 130px;
 }
 
 .cmt:hover{
@@ -64,11 +70,16 @@
 	cursor: pointer;
 }
 
-
+.share{
+	text-align: center;
+	line-height: 30px;
+	height: 30px;
+	width: 130px;
+}
 .share:hover{
 	background: #EEEEEE;
 	height: 30px;
-	width: 110px;
+	width: 130px;
 	cursor: pointer;
 }
 
