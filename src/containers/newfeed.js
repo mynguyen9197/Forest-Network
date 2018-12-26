@@ -7,7 +7,6 @@ import NewFeed from '../components/newfeed/newfeed'
 
 const mapDispatchToProps = (dispatch) => {
 	return{
-    		loadPosts: () => dispatch(loadPost()),
         loadRecommand: () => dispatch(loadRecommand()),
         loadOwner: () => dispatch(loadOwner()),
 	}
@@ -15,7 +14,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts.posts,
     recommands: state.recommands.recommands,
     owner: state.owner.owner,
   }

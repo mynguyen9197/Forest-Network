@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Comment from './comment.js';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
-
+import { postReact, postComment } from './../../actions/actionNewfeed.js'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import './style.css';
+
 
 class Post extends Component{
     constructor(props){
@@ -16,11 +18,12 @@ class Post extends Component{
         
     }
 
-    onClickReact(){
+    async onClickReact(){
         this.setState({
             isReact:true
         })
-        
+        this.props.postReact(this.props.infoPost.hash, 1)
+        await axios.get(`http://localhost:5000/api/v2/read`)
     }
 
     onClickDisReact(){
@@ -29,12 +32,15 @@ class Post extends Component{
         })
     }
 
-    onClickComment(){
-        this.setState({
-            isComment:true
-        })
-        
-    }
+    handleKeyPress = async (e)=> {
+        if (e.key === 'Enter') {
+            this.props.postComment(this.props.infoPost.hash, document.getElementById("myTag").value)
+            e.preventDefault();
+            document.getElementById("myTag").value = ''
+            await axios.get(`http://localhost:5000/api/v2/read`)
+
+        }
+     }
 
     render() {
         var vals = ''
@@ -78,13 +84,40 @@ class Post extends Component{
                         {this.props.infoPost.react.length}
                     </div>
                     }
-                    <div className="cmt" onClick={this.onClickComment.bind(this)}><span className="cmtSpan">{this.props.infoPost.comment.length}</span> Comments</div>
+                    <div className="cmt"><span className="cmtSpan">{this.props.infoPost.comment.length}</span> Comments</div>
                     <div className="share">Shares</div>
-                </div>  
+                </div>
+                <div className="comment">
+                    <div className="avatarComment">
+                        <img className="imgAvatarCmt" src={'data:image/jpeg;base64,' + vals}/>
+                    </div>
+                    <div className="boxComment">
+                        <form className="formCmt">  
+                            <div className="contentCmt">
+                                <div className="1p1t">
+                                    <input className="_1p1v" 
+                                        id="myTag" style={{whiteSpace:`pre-wrap`}} 
+                                        placeholder="Write a comment..."
+                                        onKeyPress={this.handleKeyPress} 
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {this.props.infoPost.comment.map((item, i) => <Comment infoComment={item} infoOnwer={this.props.infoOnwer} />)}
             </div>
         );
     }
 
 }
 
-export default Post;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        postReact:(transaction, number) => dispatch(postReact(transaction, number)),
+        postComment:(transaction, content) => dispatch(postComment(transaction, content))
+    }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(Post))

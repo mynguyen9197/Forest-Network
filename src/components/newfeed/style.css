@@ -132,3 +132,14 @@
     margin-left: 1px;
 }
 
+.comment{
+    margin-bottom: 1em;
+}
+.boxComment{
+    height: 37px;
+}
+.contentCmt{
+    line-height: normal;
+    height: 37px;
+    padding-left: 8px;
+}

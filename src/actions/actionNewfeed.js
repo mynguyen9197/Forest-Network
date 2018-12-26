@@ -1,72 +1,92 @@
 import axios from 'axios'
+import { deriveKey, sequence, server } from '../utils'
+import { encode, decode, sign } from '../lib/tx'
 
-export const loadPost = () => {
-	
-	return {
-		type: 'LOAD_POSTS',
-		posts: [
-			{ 
-				id: 1,
-				urlAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpDPuGVRffI_epg_UeyVwlcXFPP-tHECEZbVvKXeEG4OAlmEmI",
-				name: "NaNa",
-				statusPost: "publicly",
-				timePost: 20,
-				content: "Tôi đói quá ^^ huhuhu:((",
-				urlPhoto: "https://image2.tin247.com/pictures/2014/05/01/hbc1398918340.png",
-				react: 100,
-				comment: 100,
-				share: 100,
-			},
-			{ 
-				id: 2,
-				urlAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpDPuGVRffI_epg_UeyVwlcXFPP-tHECEZbVvKXeEG4OAlmEmI",
-				name: "NaNa",
-				statusPost: "publicly",
-				timePost: 20,
-				content: "Cà rem thật tuyệt ^^ hí hí hí:))",
-				urlPhoto: "https://vmode.vn/uploads/2014/06/be-yeu.jpg",
-				react: 100,
-				comment: 100,
-				share: 100,
-			},
-			{
-				id: 3,
-				urlAvatar: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep-doc-dao-nhat-29.jpg",
-				name: "Cristinal Ronaldo",
-				statusPost: "privately",
-				timePost: 20,
-				content: "Messi! I am not so good",
-				urlPhoto: "../../img/twitter.png",
-				react: 200,
-				comment: 100,
-				share: 10,
-			},
-			{ 
-				id: 4,
-				urlAvatar: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep-doc-dao-nhat-29.jpg",
-				name: "Chi Pu",
-				statusPost: "publicly",
-				timePost: 20,
-				content: "Anh xin lỗi em đi",
-				urlPhoto: "https://i.ytimg.com/vi/eXcWnvxK7Z8/hqdefault.jpg",
-				react: 100,
-				comment: 100,
-				share: 100,
-			},
-			{ 
-				id: 5,
-				urlAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpDPuGVRffI_epg_UeyVwlcXFPP-tHECEZbVvKXeEG4OAlmEmI",
-				name: "NaNa",
-				statusPost: "publicly",
-				timePost: 20,
-				content: "Cà rem thật tuyệt ^^ hí hí hí:))",
-				urlPhoto: "https://vmode.vn/uploads/2014/06/be-yeu.jpg",
-				react: 100,
-				comment: 100,
-				share: 100,
-			},
-		]
+const secret = localStorage.getItem('secret')
+const pub = localStorage.getItem('public')
+
+const comment = async (transaction, content) => {
+	var publicKey = pub
+	var secretKey = deriveKey(secret)
+
+	var cur_sequence = await sequence(publicKey) + 1
+
+	const tx = {
+		version: 1,
+	    account: publicKey,
+	    sequence: cur_sequence,
+	    memo: Buffer.alloc(0),
+	    operation: "interact",
+	    params:{
+	    	object: transaction,
+	     	content: {
+	     		type: 1,
+	     		text: content
+	     	}
+	    },
+	    signature: new Buffer(64),
 	}
+
+	sign(tx, secretKey)
+	var post = '0x' + encode(tx).toString('hex')
+
+	return post
+}
+const react = async (transaction, number) => {
+	const publicKey = pub
+	const secretKey = deriveKey(secret)
+	var cur_sequence = await sequence(publicKey) + 1
+
+	const tx = {
+		version: 1,
+	    account: publicKey,
+	    sequence: cur_sequence,
+	    memo: Buffer.alloc(0),
+	    operation: "interact",
+	    params:{
+	    	object: transaction,
+	     	content:{
+	     		type: 2,
+	     		reaction: number
+	     	}
+	    },
+	    signature: new Buffer(64),
+	}
+
+	sign(tx, secretKey)
+	var post = '0x' + encode(tx).toString('hex')
+	console.log(post)
+
+	return post
+}
+export const postReact = (transaction, number) => {
+	return dispatch => react(transaction, number)
+	.then(response =>{
+		return fetch("/transaction", {
+		  method: 'POST',
+		  body: JSON.stringify({encoded: response}),
+		  headers:{
+		    'Content-Type': 'application/json'
+		  }
+		}).then(response => {
+				dispatch({ type: 'POST_REACT' })
+			})
+		}).catch(err => dispatch({ type: 'POST_ERROR', err }))
+}
+
+export const postComment = (transaction, content) => {
+	return dispatch => comment(transaction, content)
+	.then(response =>{
+		return fetch("/transaction", {
+		  method: 'POST',
+		  body: JSON.stringify({encoded: response}),
+		  headers:{
+		    'Content-Type': 'application/json'
+		  }
+		}).then(response => {
+				dispatch({ type: 'POST_COMMENT' })
+			})
+		}).catch(err => dispatch({ type: 'POST_ERROR', err }))
 }
 
 export const loadRecommand = () => {

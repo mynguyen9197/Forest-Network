@@ -26,11 +26,16 @@ class NewFeed extends Component{
 	}
 
 	componentDidMount(){
-	    this.props.loadPosts()
 	    this.props.loadRecommand()
 	    this.props.loadOwner()
-	    this.loadNewFeed()
+	 	this.loadNewFeed()
+
+	 //    setInterval( async () => {
+	 //    	this.loadNewFeed()
+		// }, 4000)
   	}
+
+  	//background = async
 
   	loadNewFeed = async () => {
   		var res1 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${this.state.account}`)
