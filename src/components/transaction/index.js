@@ -99,7 +99,7 @@ class Transacion extends Component {
 		return (
 			<div>
 				<Header owner={this.props.owner} />
-				<HeaderWall owner={this.props.owner}/>
+				<HeaderWall owner={this.props.owner} account={localStorage.getItem('public')}/>
 				<div className="wrap">
 					<button type="button" className="btn btn-primary trans" onClick={this.onOpenModal.bind(this)}
 					style={{height:"50px"}}>Thực hiện giao dịch</button>
@@ -190,9 +190,6 @@ const TransRow = (props) => {
       </td>
       <td>
         { props.data.address }
-      </td>
-      <td>
-        { props.data.amount }
       </td>
       <td>
         { props.data.amount }

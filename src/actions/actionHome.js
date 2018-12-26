@@ -5,12 +5,13 @@ const secret = localStorage.getItem('secret')
 const pub = localStorage.getItem('public')
 //'GDAAVIRUC7PII4YR5SZQHKBCY3PZDNN6XAORXRIXGLPNGSW7ECSRO5OZ'
 export const loadPost = (user) => {
+	console.log(user)
 	return dispatch => {
-		return fetch(`/getPost?account=${user}`)
+		return fetch(`/v2/getPost?account=${user}`)
 		.then(response => {
 			response.json()
 			.then(result => {
-				console.log(result.post)
+				//console.log(result.post)
 				dispatch({ type: 'LOAD_POSTS', posts: result.post})
 			})
 		}).catch(err => dispatch({ type: 'LOAD_POSTS_ERROR', err }))
@@ -42,26 +43,16 @@ export const loadRecommand = () => {
 }
 
 export const loadOwner = (user) => {
-	// return dispatch => {
-	// 	return fetch(`/users/getInf?account=${user}`)
-	// 	.then(response => {
-	// 		response.json()
-	// 		.then(result => {
-	// 			//console.log(result)
-	// 			dispatch({ type: 'LOAD_OWNER', owner:result })
-	// 		})
-	// 	}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
-	// }	
 	return dispatch => {
-		return fetch(`/users/get?account=${user}`)
+		return fetch(`/v2/getInfor?account=${user}`)
 		.then(response => {
 			response.json()
 			.then(result => {
-				console.log(result[0])
-				dispatch({ type: 'LOAD_OWNER', owner:result[0] })
+				//console.log(result)
+				dispatch({ type: 'LOAD_OWNER', owner:result.user })
 			})
 		}).catch(err => dispatch({ type: 'LOAD_ERROR', err }))
-	}	
+	}		
 }
 
 export const postStatus = (content, shareWith) => {
@@ -104,9 +95,36 @@ const postContent = async (content, shareWith) => {
 	return post
 }
 
-export const loadAllAcc = () => {
-	return {
-		type: 'LOAD_ALL',
-		allpeople: []
+// export const loadAllAcc = () => {
+// 	return dispatch => {
+// 		return fetch(`/v2/getUsers`)
+// 		.then(response => {
+// 			response.json()
+// 			.then(result => {
+// 				console.log(result)
+// 				dispatch({ type: 'LOAD_ALL_ACC', accounts:result })
+// 			})
+// 		}).catch(err => dispatch({ type: 'LOAD_ALL_ERROR', err }))
+// 	}
+// }
+
+export const loadBalance = (user) => {
+	return dispatch => {
+		return fetch(`/v2/pay?account=${user}`)
+		.then(response => {
+			response.json()
+			.then(result => {
+				dispatch({ type: 'LOAD_BALANCE', pay: result.pay, recv: result.receive})
+			})
+		}).catch(err => dispatch({ type: 'LOAD_BALANCE_ERROR', err }))
+	}
+}
+
+export const loadSequence = (user) => {
+	return dispatch => {
+		return sequence(user)
+		.then(response => {
+			dispatch({ type: 'LOAD_SEQUENCE', sequence: response})
+		}).catch(err => dispatch({ type: 'LOAD_SEQUENCE_ERROR', err }))
 	}
 }

@@ -24,21 +24,21 @@ class Home extends Component {
 	    this.props.loadPosts(this.state.user)
 	    this.props.loadRecommand()
 	    this.props.loadOwner(this.state.user)
+	    this.props.loadBalance(this.state.user)
+	    this.props.loadSequence(this.state.user)
   	}																
 
 	render(){
-		//console.log( this.props.posts)
 		return (
 			<React.Fragment>
 				<Header owner={this.props.owner} />
-				<HeaderWall owner={this.props.owner} account={this.state.user}/>
+				<HeaderWall owner={this.props.owner} account={this.state.user} numPosts={this.props.posts.length}/>
 				<div className="content">
-					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit} />
+					<InfoOwner owner={this.props.owner} isEdit={this.props.flatEdit} balance={this.props.balance} seq={this.props.sequence}/>
 					<div>
 						{ this.props.posts.map((item, i) => {
-							if(item.type===1) return <Post infoPost={item} owner={this.props.owner} account={this.state.user}/>})}
+							return <Post infoPost={item} key={i} owner={this.props.owner} account={this.state.user}/>})}
 					</div>
-					<Recommand recommands={this.props.recommands}/>
 				</div>
 			</React.Fragment>
 		);

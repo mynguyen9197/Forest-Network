@@ -6,10 +6,11 @@ const user = localStorage.getItem('public')
 
 export const loadPayment = () => {
 	return dispatch => {
-		return fetch(`/payment?account=${user}`)
+		return fetch(`/v2/getPayments?account=${user}`)
 		.then(response => {
 			response.json()
 			.then(result => {
+				console.log(result)
 				dispatch({ type: 'LOAD_PAYMENTS', send: result.send, receive: result.receive})
 			})
 		}).catch(err => dispatch({ type: 'LOAD_PAYMENTS_ERROR', err }))

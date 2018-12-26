@@ -21,8 +21,9 @@ class PersonList extends Component {
  		let followList = []
  		if(this.state.key){
 	      this.props.follows.map(user => {
-	        if(user.displayName.toLowerCase().includes(this.state.key.toLowerCase()) === true || user.publicKey === this.state.key){
+	        if(user.name.toLowerCase().includes(this.state.key.toLowerCase()) === true || user.publicKey === this.state.key){
 	          followList.push(user)
+	          console.log({key: this.state.key, pub: user.publicKey})
 	        }
 	      })
 	    }else {

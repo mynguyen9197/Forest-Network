@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
+import { loadOwner } from '../../actions/actionHome'
 
 class Person extends Component {
 	constructor(props){
@@ -17,14 +18,20 @@ class Person extends Component {
 	}
 
 	render(){
+		// if(this.props.follow.avatar!=='undefine'){
+		// 	let bufferOriginal = Buffer.from(this.props.follow.avatar)
+  //           const vals = bufferOriginal.toString('base64')
+		// }
+  //       	console.log(this.props.follow.avatar)
 		return (
        		<div className="ProfileCard">
-	  			<Link to={`/accounts/${this.props.follow}`} className="ProfileCard-bg" style={{background: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRTtY1L05JaQBl_WKkjh6cB1sZlov7h086zcpCekmsPoGATf1noQ")`}}>
+	  			<Link to={`/following/${this.props.follow.publicKey}`} className="ProfileCard-bg" style={{background: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRTtY1L05JaQBl_WKkjh6cB1sZlov7h086zcpCekmsPoGATf1noQ")`}}>
 	  			</Link>
 
 	  			<div className="ProfileCard-content">
-	    			<Link to={`/accounts/${this.props.follow}`} className="ProfileCard-avatarLink js-nav js-tooltip">
-	      				<img className="ProfileCard-avatarImage js-action-profile-avatar" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png" alt="" />
+	    			<Link to={`/following/${this.props.follow.publicKey}`} className="ProfileCard-avatarLink js-nav js-tooltip">
+	      				{!this.props.follow.avatar?<img className="ProfileCard-avatarImage js-action-profile-avatar" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png" alt="" />:
+	      				<img className="ProfileCard-avatarImage js-action-profile-avatar" src={this.props.follow.avatar} alt="" />}
 	    			</Link>
 	    
 	      			<div className="ProfileCard-actions">
@@ -59,13 +66,13 @@ class Person extends Component {
 				    <div className="ProfileCard-userFields">
 				      <div className="ProfileNameTruncated account-group">
 				  		<div className="u-textTruncate u-inlineBlock">
-				    		<Link to={`/accounts/${this.props.publicKey}`} className="fullname ProfileNameTruncated-link u-textInheritColor js-nav">
+				    		<Link to={`/following/${this.props.follow.publicKey}`} className="fullname ProfileNameTruncated-link u-textInheritColor js-nav">
 				      			{this.props.follow.displayName}</Link></div><span className="UserBadges"></span>
 				      </div>
 				      
 				      <span className="ProfileCard-screenname">
-				        <Link to={`/accounts/${this.props.follow}`} className="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part="">
-				          <span className="username u-dir" dir="ltr">@<b className="u-linkComplex-target">{this.props.follow.username}</b></span>
+				        <Link to={`/following/${this.props.follow.publicKey}`} className="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part="">
+				          <span className="username u-dir" dir="ltr"><b className="u-linkComplex-target">{this.props.follow.name}</b></span>
 				        </Link><span>‏</span> {this.props.isFollower || this.props.follow.followed?<span className="FollowStatus">Follows you</span>:<span></span>}
 				      </span>
 				      

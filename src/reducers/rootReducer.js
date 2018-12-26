@@ -15,6 +15,9 @@ const reducer = combineReducers({
 	profile: profile.profileReducer,
 	flatEdit: edit.editReducer,
 	payments: payment.paymentReducer,
+	balance: home.loadBalance,
+	sequence: home.loadSequence,
+	curUser: follow.loadCurUser,
 })
 
 export default reducer

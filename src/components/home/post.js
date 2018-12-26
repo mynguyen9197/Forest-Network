@@ -33,16 +33,17 @@ class Post extends Component{
     }
 
     render(){
+        const date = new Date(this.props.infoPost.date)
         return (
         <div className="post" id="opacity">
             <div className="owner">
-                <img src={this.props.owner.urlAvatar} alt="" />
+                <img src={this.props.owner.Avatar} alt="" />
                 <div className="info-post">
                     <Link to={`/accounts/${this.state.publicKey}`} className="name"> {this.props.owner.name} </Link>
-                    <div className="time-post">Shared <span>&nbsp;{this.props.infoPost.statusPost}</span>&nbsp;-&nbsp;<span> about {this.props.infoPost.timePost} minutes ago </span> </div>
+                    <div className="time-post">Shared <span>&nbsp;{this.props.infoPost.statusPost}</span>&nbsp;-&nbsp;<span> at {date.toString()} </span> </div>
                 </div>
             </div>
-            <div className="content-post" cols="50">{this.props.infoPost.text}</div>
+            <div className="content-post" cols="50">{this.props.infoPost.content}</div>
             <img className="img-post" src={this.props.infoPost.urlPhoto} alt="" />
             <div className="attention">
                 {

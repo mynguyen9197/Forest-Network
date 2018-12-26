@@ -18,11 +18,6 @@ class Login extends Component{
 		}
 	}
 
-	// componentDidMount(){
-	// 	let { from } = this.props.location.state || { from: { pathname: "/" } }
-	// 	if (localStorage.getItem('secret')) return <Redirect to={from} />
-	// }
-
 	handleChange(e){
 		this.setState({
 			secret: e.target.value
