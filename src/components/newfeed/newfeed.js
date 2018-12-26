@@ -14,18 +14,63 @@ class NewFeed extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			response: ''
+			response: '',
+			account: '',
+			post: [],
+			ownerpost: [],
 		}
 	}
 
+	componentWillMount() {
+	    this.setState({account: localStorage.getItem('public')})
+	}
 
 	componentDidMount(){
 	    this.props.loadPosts()
 	    this.props.loadRecommand()
 	    this.props.loadOwner()
+	    this.loadNewFeed()
   	}
 
+  	loadNewFeed = async () => {
+  		var res1 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${this.state.account}`)
+  		this.setState({ 
+  			ownerpost: this.state.ownerpost.concat(res1.data.user)
+  		})
 
+  		var res = await axios.get(`http://localhost:5000/api/v2/getPost?account=${this.state.account}`)
+  		this.setState({ 
+  			post: [...this.state.post, ...res.data.post]
+  		})
+
+  		await res1.data.user.following.forEach( async item => {
+  			var tmp = await axios.get(`http://localhost:5000/api/v2/getPost?account=${item}`)
+  			this.setState({ 
+  				post: [...this.state.post, ...tmp.data.post]
+  			})
+  			var res1 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${item}`)
+	  		this.setState({ 
+	  			ownerpost: this.state.ownerpost.concat(res1.data.user)
+	  		})
+  		})
+
+		this.setState({ post: this.sort(this.state.post)})
+  	}
+
+  	sort = (Post) => {
+  		var Arr = Post
+  		for( var i =  Arr.length - 1 ; i > 0; i--)
+  			for( var j = 0; j < i; j++)
+  			{
+  				if(Date.parse(Arr[j].date) < Date.parse(Arr[j+1].date))
+  				{
+  					var tmp = Arr[j]
+  					Arr[j] = Arr[j+1]
+  					Arr[j+1] = tmp
+  				}
+  			}
+  		return Arr
+  	}
 
 	render(){
 		return(
@@ -35,18 +80,15 @@ class NewFeed extends Component{
 					<Profile/>
 					<div className="content">
 						<div className="postsnewfeed">
-							{ this.props.posts.map((item, i) => <Post infoPost={item}/>)}
+							{ this.state.post.map((item, i) => <Post infoPost={item} infoOnwer={this.state.ownerpost} />)}
 						</div>
-						<Recommand recommands={this.props.recommands}/>
-						
+						<Recommand recommands={this.props.recommands}/>		
 					</div>
 				</div>
-
 			</>
 		);
 	}
 }
-
 
 export default NewFeed;
 

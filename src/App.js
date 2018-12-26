@@ -46,7 +46,7 @@ const App = () => (
           <AuthRoute exact path="/following" component={Following} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp}/>
-          <Route exact path="/" component={NewFeed}/>
+          <AuthRoute exact path="/" component={NewFeed} />
         </Switch>
       </Router>
   </Router>
