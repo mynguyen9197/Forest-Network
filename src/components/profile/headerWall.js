@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Modal from 'react-responsive-modal'
-import { flatEdit } from '../../actions/actionProfile'
+import { flatEdit,changeAvatar } from '../../actions/actionProfile'
 import { followSO, loadCurUser } from '../../actions/actionFollow'
 import AvatarEditor from 'react-avatar-editor'
 import Avatar from 'react-avatar-edit'
@@ -58,13 +58,15 @@ class HeaderWall extends Component {
 
     handleChange(e){
         this.setState({
-          file: URL.createObjectURL(e.target.files[0])
+            file: URL.createObjectURL(e.target.files[0]),
+            x: e.target.files[0]
         })
     }
 
     handleSave(e){
         e.preventDefault()
-        console.log(this.state.file)
+        this.props.changeAvatar(this.state.x)
+        console.log(this.state.x)
     }
 
     componentWillmount(){
@@ -79,14 +81,6 @@ class HeaderWall extends Component {
     }
 
     render() {
-        // let isFollowing = this.state.isFollowing
-        // for(let i =0;i<this.props.followers.length;i++){
-        //     if(this.props.followers[i] === localStorage.getItem('public'))
-        //     {
-        //         isFollowing = true
-        //         break;
-        //     }
-        // }
 
         var vals = ''
         if(this.props.curUser.Avatar)
@@ -132,8 +126,8 @@ class HeaderWall extends Component {
                 </div>
                     <Modal open={this.state.open} onClose={this.onCloseModal.bind(this)} top>
                           <div>
-                            <input type="file" onChange={this.handleChange.bind(this)}/>
-                            <button type="button" class="btn btn-primary" onClick={this.handleSave.bind(this)}>Basic</button>
+                            <input id="Myfile" type="file" onChange={this.handleChange.bind(this)}/>
+                            <button type="button" class="btn btn-primary" onClick={this.handleSave.bind(this)}>Save</button>
                             <img src={this.state.file}/>
                           </div>
 
@@ -146,7 +140,8 @@ class HeaderWall extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         flatEdit:(bool) => dispatch(flatEdit(bool)),
-        followSO: (acc) => dispatch(followSO(acc)),
+        followSO:(acc) => dispatch(followSO(acc)),
+        changeAvatar:(file) => dispatch(changeAvatar(file)),
     }
 }
 

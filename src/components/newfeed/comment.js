@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import './style.css';
+import axios from 'axios';
 
 class Comment extends Component{
+
 	render(){
 		var vals
 		for( var i = 0 ; i < this.props.infoOnwer.length; i++)
         {
-            if(this.props.infoOnwer[i].publicKey == this.props.infoComment.account && this.props.infoOnwer[i].Avatar)
+            if(this.props.infoOnwer[i].publicKey === localStorage.getItem('public') && this.props.infoOnwer[i].Avatar)
             {
+            	console.log(this.props.infoOnwer[i].publicKey )
                 let bufferOriginal = Buffer.from(this.props.infoOnwer[i].Avatar);
                 vals = bufferOriginal.toString('base64')
             }

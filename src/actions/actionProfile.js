@@ -1,6 +1,5 @@
 import { deriveKey, sequence, server } from '../utils'
 import { encode, decode, sign } from '../lib/tx'
-import { FileReader } from 'filereader'
 import { FileAPI } from 'file-api'
 
 const secret = localStorage.getItem('secret')
@@ -67,16 +66,13 @@ const rename = async (name) => {
 }
 
 const picture = async (file) => {
-
    	var fileReader = new FileReader()
    	const secretKey = deriveKey(secret)
 
-   	var pic 
-	fileReader.readAsBinaryString(new FileAPI.File(file))
-	fileReader.on('data', function (data) {
-	  pic = data
-	})
+   	fileReader.readAsBinaryString(file)
 
+
+	console.log(fileReader.readAsBinaryString(file).result)
 	const cur_sequence = await sequence(user) + 1
 	const tx = {
 		version: 1,
@@ -86,7 +82,7 @@ const picture = async (file) => {
 	    operation: "update_account",
 	    params:{
 	    	key: "picture",
-	    	value: pic,
+	    	value: fileReader.readAsBinaryString(file),
 	    },
 	    signature: new Buffer(64),
 	}

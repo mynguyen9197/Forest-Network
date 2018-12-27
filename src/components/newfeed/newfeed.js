@@ -29,7 +29,6 @@ class NewFeed extends Component{
 	    this.props.loadRecommand()
 	    this.props.loadOwner()
 	 	this.loadNewFeed()
-
 	    setInterval( async () => {
 	    	this.background()
 		}, 4000)
@@ -49,7 +48,6 @@ class NewFeed extends Component{
   			var tmp = await axios.get(`http://localhost:5000/api/v2/getPost?account=${res1.data.user.following[i]}`)
   			tmpPost = tmpPost.concat(tmp.data.post)
 
-  			console.log(tmpPost)
   			var res2 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${res1.data.user.following[i]}`)
 	  		tmpOwner = tmpOwner.concat(res2.data.user)
 	  	}
@@ -113,7 +111,7 @@ class NewFeed extends Component{
 						<div className="postsnewfeed">
 							{ this.state.post.map((item, i) => <Post infoPost={item} infoOnwer={this.state.ownerpost} />)}
 						</div>
-						<Recommand recommands={this.props.recommands}/>		
+						<Recommand/>		
 					</div>
 				</div>
 			</>
