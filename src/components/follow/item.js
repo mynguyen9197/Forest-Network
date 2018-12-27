@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
 import { loadOwner } from '../../actions/actionHome'
+import { connect } from 'react-redux'
+import { followSO, loadCurUser } from '../../actions/actionFollow'
 
 class Person extends Component {
 	constructor(props){
@@ -12,9 +14,33 @@ class Person extends Component {
 	}
 
 	handleClick(){
+		let list = this.props.curUser.following
+        if(!this.state.isFollowing){
+            list.push(this.state.user)
+            this.props.followSO(list)
+        }
+        else{
+        	var ind = list.indexOf(this.props.follow.publicKey)
+        	if(ind>-1) {
+        		list.splice(ind, 1)
+        		this.props.followSO(list)
+        	}
+        	
+        }
+
 		this.setState({
 			isFollowing: !this.state.isFollowing
 		})
+	}
+
+	componentDidMount(){
+		// let list = this.props.curUser.following
+		// var ind = list.indexOf(this.props.follow.publicKey)
+		// if(ind===-1) {
+  //       		this.setState({
+  //       			isFollowing: false
+  //       		})
+  //       	}
 	}
 
 	render(){
@@ -85,4 +111,17 @@ class Person extends Component {
 	}
 }
 
-export default Person
+const mapStateToProps = (state) => {
+  return {
+    curUser: state.curUser.curUser,
+    owner: state.owner.owner,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        followSO: (acc) => dispatch(followSO(acc)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Person)
