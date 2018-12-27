@@ -30,12 +30,38 @@ class NewFeed extends Component{
 	    this.props.loadOwner()
 	 	this.loadNewFeed()
 
-	 //    setInterval( async () => {
-	 //    	this.loadNewFeed()
-		// }, 4000)
+	    setInterval( async () => {
+	    	this.background()
+		}, 4000)
   	}
 
-  	//background = async
+  	background = async () => {
+  		var tmpPost = []
+  		var tmpOwner = []
+  		var res1 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${this.state.account}`)
+  		tmpOwner = tmpOwner.concat(res1.data.user)
+
+  		var res = await axios.get(`http://localhost:5000/api/v2/getPost?account=${this.state.account}`)
+  		tmpPost = tmpPost.concat(res.data.post)
+
+  		for(var i = 0; i < res1.data.user.following.length; i++)
+  		{
+  			var tmp = await axios.get(`http://localhost:5000/api/v2/getPost?account=${res1.data.user.following[i]}`)
+  			tmpPost = tmpPost.concat(tmp.data.post)
+
+  			console.log(tmpPost)
+  			var res2 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${res1.data.user.following[i]}`)
+	  		tmpOwner = tmpOwner.concat(res2.data.user)
+	  	}
+
+  		if(this.state.post != undefined && this.state.ownerpost != undefined)
+  		{
+  			this.setState({
+  				post: this.sort(tmpPost),
+  				ownerpost: tmpOwner
+  			})
+  		}
+  	}
 
   	loadNewFeed = async () => {
   		var res1 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${this.state.account}`)
@@ -53,9 +79,9 @@ class NewFeed extends Component{
   			this.setState({ 
   				post: [...this.state.post, ...tmp.data.post]
   			})
-  			var res1 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${item}`)
+  			var res2 = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${item}`)
 	  		this.setState({ 
-	  			ownerpost: this.state.ownerpost.concat(res1.data.user)
+	  			ownerpost: this.state.ownerpost.concat(res2.data.user)
 	  		})
   		})
 
