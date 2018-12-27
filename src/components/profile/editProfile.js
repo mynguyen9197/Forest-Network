@@ -10,7 +10,7 @@ class EditProfile extends Component {
     constructor(props){
         super(props)
         this.state = { 
-            displayName: this.props.profile.email,
+            displayName: this.props.profile.name,
         }
     }
 

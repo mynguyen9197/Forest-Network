@@ -21,3 +21,15 @@ export const loadFollowing = (state = { following:[] }, action) => {
 			return state
 	}
 }
+
+export const loadCurUser = (state = { curUser:{} }, action) => {
+	switch(action.type){
+		case 'LOAD_CUR_USER':
+			return {
+				...state,
+				curUser: {...state.curUser, ...action.curUser}
+			}
+		default:
+			return state
+	}
+}

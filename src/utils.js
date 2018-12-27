@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { decode, encode, sign } from './lib/tx'
 
-export const server = "https://gorilla.forest.network/"
+export const server = "https://komodo.forest.network/"
 
 export const sequence = async (address) => {
 	var cur_sequence = 0

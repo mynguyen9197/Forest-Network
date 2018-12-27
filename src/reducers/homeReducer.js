@@ -33,3 +33,28 @@ export const loadOwner = (state = { owner:{} }, action) => {
 			return state
 	}
 }
+
+export const loadBalance = (state = { pay:{}, recv: {} }, action) => {
+	switch(action.type){
+		case 'LOAD_BALANCE':
+			return {
+				...state,
+				pay: action.pay,
+				recv: action.recv
+			}
+		default:
+			return state
+	}
+}
+
+export const loadSequence = (state = { sequence: {} }, action) => {
+	switch(action.type){
+		case 'LOAD_SEQUENCE':
+			return {
+				...state,
+				sequence: action.sequence
+			}
+		default:
+			return state
+	}
+}
