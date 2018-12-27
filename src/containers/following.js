@@ -37,7 +37,7 @@ class FollowingList extends Component {
 				<HeaderWall owner={this.props.owner} account={this.state.user} followers={followers} />
 				<div className="content">
 					<InfoOwner owner={this.props.owner}  isEdit={this.props.flatEdit} balance={this.props.balance} seq={this.props.sequence}/>
-					<PersonList follows = { follows } isFollowing = { true } listFollow={this.props.curUser}/>
+					<PersonList follows = { follows } isFollowing = { true } />
 				</div>
 			</React.Fragment>	
 		);

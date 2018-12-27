@@ -14,7 +14,7 @@ class HeaderWall extends Component {
     constructor(props){
         super(props)
         this.state = {
-            isFollowing: false,
+            isFollowing: '',
             user: this.props.account,
             isEdit: false,
             file: null,
@@ -36,6 +36,12 @@ class HeaderWall extends Component {
         if(!this.state.isFollowing){
             list.push(this.state.user)
             this.props.followSO(list)
+        }else{
+            var ind = list.indexOf(this.props.owner.publicKey)
+            if(ind>-1) {
+                list.splice(ind, 1)
+                this.props.followSO(list)
+            }
         }
         
 
@@ -69,15 +75,21 @@ class HeaderWall extends Component {
         console.log(this.state.x)
     }
 
-    componentWillmount(){
-        for(let i =0;i<this.props.curUser.following.length;i++){
-            if(this.props.followers[i] === localStorage.getItem('public'))
-            {
+    check = async()=>{
+        let list = this.props.curUser.following
+        var ind = list.indexOf(this.props.owner.publicKey)
+            if(ind>-1) {
                 this.setState({
                     isFollowing: true
                 })
             }
-        } 
+    }
+
+    componentDidMount(){
+        setInterval( async () => {
+            this.check()
+        }, 2000)
+        
     }
 
     render() {
@@ -105,7 +117,7 @@ class HeaderWall extends Component {
                     </div>
                     {this.state.user === localStorage.getItem('public')?
                     <div className="profile-items">
-                        <Link to={`/accounts/${this.state.user}`} className="profile-item">
+                        <Link to="/" className="profile-item">
                             <div className="item"> Post </div>
                         </Link>
                         <Link to={`/following/${this.state.user}`} className="profile-item"> 

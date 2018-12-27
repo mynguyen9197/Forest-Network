@@ -4,6 +4,7 @@ import './style.css';
 import axios from 'axios';
 
 
+
 class Profile extends Component{
     async componentWillMount() {
         var res = await axios.get(`http://localhost:5000/api/v2/getInfor?account=${localStorage.getItem('public')}`)
@@ -57,6 +58,6 @@ class Profile extends Component{
     }
 }
 
-export default Profile;
+export default Profile
 
 

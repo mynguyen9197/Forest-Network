@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Person from './item'
 import '../../App.css'
 import './style.css'
+import { connect } from 'react-redux'
 
 class PersonList extends Component {
 	constructor(props){
@@ -31,17 +32,24 @@ class PersonList extends Component {
 	        followList.push(user)
 	      })
 	    }
+	    let list = this.props.curUser.following
  		return (
 	 		<div>
 	 			<input className="search" placeholder="Search" onChange={this.handleSearch.bind(this)} style={{width:"100%", marginLeft: "0px"}}/>
 			    <br /> <br />
 			    <div className="follow-cell">
-			      { followList.map((follow, i) => <Person key={i} follow = {follow} isFollower = {this.props.isFollower} isFollowing = {this.props.isFollowing}/> )}
+			      { followList.map((follow, i) => <Person key={i} follow = {follow} isFollowing = {true}/>
+					 )}
 			    </div>
 			</div>
 	  	)
  	}
 }
 
+const mapStateToProps = (state) => {
+  return {
+    curUser: state.curUser.curUser,
+  }
+}
 
-export default PersonList;
+export default connect(mapStateToProps)(PersonList);
