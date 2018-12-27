@@ -35,12 +35,12 @@ class Person extends Component {
 
 	componentDidMount(){
 		// let list = this.props.curUser.following
-		// var ind = list.indexOf(this.props.follow.publicKey)
-		// if(ind===-1) {
-  //       		this.setState({
-  //       			isFollowing: false
-  //       		})
-  //       	}
+		// 	var ind = list.indexOf(this.props.follow.publicKey)
+		// 	if(ind===-1) {
+	 //        		this.setState({
+	 //        			isFollowing: false
+	 //        		})
+	 //        	}
 	}
 
 	render(){

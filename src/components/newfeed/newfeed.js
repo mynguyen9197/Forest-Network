@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import Header from '../header/header';
 import avt from '../../img/images.jpg';
@@ -108,7 +107,7 @@ class NewFeed extends Component{
 			<>
 				<Header owner={this.props.owner}/>
 				<div className="bodynewfeed">
-					<Profile/>
+					<Profile />
 					<div className="content">
 						<div className="postsnewfeed">
 							{ this.state.post.map((item, i) => <Post infoPost={item} infoOnwer={this.state.ownerpost} />)}
